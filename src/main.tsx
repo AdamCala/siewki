@@ -1,29 +1,21 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import ErrorPage from "./routes/errorPage.tsx";
-import Root from "./routes/root.tsx";
-import "./index.css";
-import Siewki from "./routes/siewki.tsx";
+import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import { store } from "./store.ts";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Root />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/siewki",
-    element: <Siewki />,
-  },
-]);
+import "./index.css";
+import App from "./App";
+import { store } from "./store";
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
+const root = ReactDOM.createRoot(
+  document.getElementById("root") as HTMLElement
+);
+root.render(
   <React.StrictMode>
-    {/* <Provider store={store}> */}
-    <RouterProvider router={router}></RouterProvider>
-    {/* </Provider> */}
+    <BrowserRouter>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </BrowserRouter>
   </React.StrictMode>
 );
