@@ -12,14 +12,10 @@ const Root = () => {
 
   const handleLogoClick = () => {
     setAnimate(1);
-    // Trigger your Framer animations here
-    setIsVisible(false); // Hide the elements during animations
-
-    // Assuming your animations take 3 seconds, adjust accordingly
+    setIsVisible(false);
     setTimeout(() => {
-      // Redirect to /siweki after animations finish
       navigate("/siewki");
-    }, 2000);
+    }, 1800);
   };
 
   return (
@@ -30,7 +26,7 @@ const Root = () => {
           key={animate}
           initial={{}}
           exit={{ width: "100%" }}
-          transition={{ duration: 1, delay: 1, ease: backInOut }}
+          transition={{ duration: 1.2, delay: 0.8, ease: backInOut }}
           className={`${styles.left} w-2/3 h-screen flex flex-col justify-center z-10`}
         >
           <motion.p
