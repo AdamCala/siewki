@@ -1,6 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap");
 /* font-family: 'Permanent Marker', cursive; */
-
+@import url("https://fonts.googleapis.com/css2?family=Tajawal:wght@800&display=swap");
+/* font-family: 'Tajawal', sans-serif; */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap");
+/* font-family: 'Roboto', sans-serif; */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

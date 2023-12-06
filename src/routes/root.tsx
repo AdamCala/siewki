@@ -14,7 +14,7 @@ const Root = () => {
     setAnimate(1);
     setIsVisible(false);
     setTimeout(() => {
-      navigate("/siewki");
+      navigate("/auth");
     }, 1800);
   };
 
