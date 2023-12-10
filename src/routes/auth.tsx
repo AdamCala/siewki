@@ -94,8 +94,7 @@ const auth = () => {
             <button type="submit" className={`${styles.buttonDiv} `}>
               <Mail className={`${styles.icon} text-black/40`} />
               <p className={`${styles.text} `}>
-                {" "}
-                {authType === "login" ? "Login" : "Sign Up"} with email
+                {authType === "login" ? "Login" : "Sign up"} with email
               </p>
             </button>
             {authType === "login" ? (
