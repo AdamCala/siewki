@@ -33,6 +33,7 @@
   padding-left: 3vh;
   padding-right: 3vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 70%;
@@ -49,19 +50,28 @@
   input:focus {
     outline: none;
   }
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    transition: background-color $light-blue ease-in-out 0s;
+  }
 }
-
+.errorMsg {
+  font-size: small;
+  color: $red;
+}
 .promptDiv {
   padding-left: 2vh;
   padding-right: 2vh;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   width: 70%;
   height: 1vh;
   letter-spacing: 0.05vh;
   font-size: medium;
-  color: rgba(black, 0.5);
+  color: rgba(black, 0.4);
   margin-top: 1vh;
 }
 
@@ -85,6 +95,9 @@
     width: 42%;
   }
   p {
+    color: rgba(black, 0.4);
+  }
+  button {
     color: rgba(black, 0.4);
   }
 }
