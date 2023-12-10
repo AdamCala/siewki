@@ -5,12 +5,43 @@ import styles from "../styles/auth/index.module.scss";
 import { AuthForm, authFormSchema } from "../models/Form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth, db } from "../config/firebase";
+import { setDoc, doc } from "firebase/firestore";
+import { useAppDispatch } from "../hooks/storeHook";
+import { login } from "../features/authSlice";
 
-const auth = () => {
+const authPage = () => {
   const [authType, setAuthType] = useState<"login" | "sign-up">("login");
+  const [loading, setLoading] = useState(false);
+  const dispatch = useAppDispatch();
 
-  const handleFormSubmit = (data: AuthForm) => {
-    console.log(data);
+  const handleFormSubmit = async (data: AuthForm) => {
+    const { email, password } = data;
+    try {
+      setLoading(true);
+      const { user } = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      console.log(user);
+
+      await setDoc(doc(db, "users", user.uid), { email });
+      setLoading(false);
+
+      if (user && user.email)
+        dispatch(
+          login({
+            email: user.email,
+            id: user.uid,
+            photoUrl: user.photoURL || null,
+          })
+        );
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+    }
   };
 
   const {
@@ -49,7 +80,7 @@ const auth = () => {
             <div className={`${styles.inputDiv} `}>
               <input
                 type="text"
-                id=""
+                id="email"
                 placeholder="example@email.com"
                 {...register("email")}
               />
@@ -64,7 +95,7 @@ const auth = () => {
             <div className={`${styles.inputDiv} `}>
               <input
                 type="password"
-                id=""
+                id="passwd"
                 placeholder="* * * * * * * *"
                 {...register("password")}
               />
@@ -79,7 +110,7 @@ const auth = () => {
             <div className={`${styles.inputDiv} `}>
               <input
                 type="password"
-                id=""
+                id="confpasswd"
                 placeholder="confirm password"
                 {...register("confirmPassword")}
               />
@@ -91,7 +122,11 @@ const auth = () => {
             ) : (
               <></>
             )}
-            <button type="submit" className={`${styles.buttonDiv} `}>
+            <button
+              disabled={loading}
+              type="submit"
+              className={`${styles.buttonDiv} `}
+            >
               <Mail className={`${styles.icon} text-black/40`} />
               <p className={`${styles.text} `}>
                 {authType === "login" ? "Login" : "Sign up"} with email
@@ -124,4 +159,4 @@ const auth = () => {
   );
 };
 
-export default auth;
+export default authPage;
