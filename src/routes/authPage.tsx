@@ -1,35 +1,79 @@
-import { useForm } from "react-hook-form";
+import styles from "../styles/auth/index.module.scss";
 import Mail from "../components/icons/email";
 import Google from "../components/icons/google";
-import styles from "../styles/auth/index.module.scss";
-import { AuthForm, authFormSchema } from "../models/Form";
-import { yupResolver } from "@hookform/resolvers/yup";
+
 import { useState } from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth, db } from "../config/firebase";
-import { setDoc, doc } from "firebase/firestore";
+import { useForm } from "react-hook-form";
+import { AuthForm, authFormSchema } from "../models/Form";
 import { useAppDispatch } from "../hooks/storeHook";
 import { login } from "../features/authSlice";
+
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
+} from "firebase/auth";
+import { setDoc, doc } from "firebase/firestore";
+import { auth, db } from "../config/firebase";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 const authPage = () => {
   const [authType, setAuthType] = useState<"login" | "sign-up">("login");
   const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<null | string>(null);
+
   const dispatch = useAppDispatch();
 
-  const handleFormSubmit = async (data: AuthForm) => {
-    const { email, password } = data;
+  const signInWithGoogle = async () => {
+    const provider = new GoogleAuthProvider();
     try {
-      setLoading(true);
-      const { user } = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      console.log(user);
+      const { user } = await signInWithPopup(auth, provider);
+      if (user && user.email) {
+        dispatch(
+          login({
+            email: user.email,
+            id: user.uid,
+            photoUrl: user.photoURL || null,
+          })
+        );
+      }
+    } catch (error) {
+      console.log("Error signing in: ", error);
+    }
+  };
 
-      await setDoc(doc(db, "users", user.uid), { email });
+  const handleFormSubmit = async (data: AuthForm) => {
+    setErrorMessage(null);
+    setLoading(true);
+    const { email, password } = data;
+    if (authType == "sign-up") {
+      try {
+        const { user } = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+
+        await setDoc(doc(db, "users", user.uid), { email });
+        setLoading(false);
+
+        if (user && user.email)
+          dispatch(
+            login({
+              email: user.email,
+              id: user.uid,
+              photoUrl: user.photoURL || null,
+            })
+          );
+      } catch (error: any) {
+        setLoading(false);
+        const errorCode = error.code;
+        setErrorMessage(errorCode);
+      }
+    } else {
+      const { user } = await signInWithEmailAndPassword(auth, email, password);
       setLoading(false);
-
       if (user && user.email)
         dispatch(
           login({
@@ -38,9 +82,6 @@ const authPage = () => {
             photoUrl: user.photoURL || null,
           })
         );
-    } catch (error) {
-      setLoading(false);
-      console.log(error);
     }
   };
 
@@ -64,10 +105,16 @@ const authPage = () => {
         className={`${styles.main} w-screen h-screen flex justify-evenly items-center flex-col`}
       >
         <form onSubmit={handleSubmit(handleFormSubmit)}>
+          {errorMessage && (
+            <p className={`${styles.errorMsgDiv} `}>{errorMessage}</p>
+          )}
           <div
             className={`${styles.loginBox} flex flex-col items-center justify-evenly`}
           >
-            <div className={`${styles.buttonDiv} `}>
+            <div
+              onClick={signInWithGoogle}
+              className={`${styles.buttonDiv} hover:cursor-pointer`}
+            >
               <Google className={`${styles.icon} `} />
               <p className={`${styles.text} `}>Login with Google</p>
             </div>
