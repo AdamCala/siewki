@@ -15,6 +15,7 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 import { setDoc, doc } from "firebase/firestore";
+import { sendPasswordResetEmail } from "firebase/auth";
 import { auth, db } from "../config/firebase";
 import { yupResolver } from "@hookform/resolvers/yup";
 import ResetPassword from "../components/resetPassword";
@@ -25,7 +26,29 @@ const authPage = () => {
   const [errorMessage, setErrorMessage] = useState<null | string>(null);
   const [resetPassword, setResetPassword] = useState(false);
 
+  const [resetPasswordEmail, setResetPasswordEmail] = useState("");
+  const [resetPasswordSuccess, setResetPasswordSuccess] = useState<
+    string | null
+  >(null);
+  const [resetPasswordError, setResetPasswordError] = useState<string | null>(
+    null
+  );
+
   const dispatch = useAppDispatch();
+
+  const handlePasswordReset = async () => {
+    if (!resetPasswordEmail.length) return;
+    try {
+      await sendPasswordResetEmail(auth, resetPasswordEmail);
+      setResetPasswordSuccess(
+        "Password reset link sent. Please check your inbox"
+      );
+      setResetPasswordError(null);
+    } catch (error: any) {
+      setResetPasswordError(error.code);
+      setResetPasswordSuccess(null);
+    }
+  };
 
   const signInWithGoogle = async () => {
     const provider = new GoogleAuthProvider();
@@ -104,8 +127,13 @@ const authPage = () => {
   return (
     <>
       <ResetPassword
+        resetPasswordEmail={resetPasswordEmail}
+        resetPasswordSuccess={resetPasswordSuccess}
+        resetPasswordError={resetPasswordError}
+        setResetPasswordEmail={setResetPasswordEmail}
         isOpen={resetPassword}
         onClose={() => setResetPassword(false)}
+        handlePasswordReset={handlePasswordReset}
       />
       <div
         className={`${styles.main} w-screen h-screen flex justify-evenly items-center flex-col`}

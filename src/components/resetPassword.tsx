@@ -1,15 +1,26 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import styles from "../styles/components/resetPassword.module.scss";
 
 interface resetPasswordProps {
   isOpen: boolean;
   onClose: () => void;
+  handlePasswordReset: () => Promise<void>;
+  resetPasswordEmail: string;
+  resetPasswordSuccess: null | string;
+  resetPasswordError: null | string;
+  setResetPasswordEmail: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const resetPassword: FC<resetPasswordProps> = (props) => {
-  const { isOpen, onClose } = props;
-
-  const [email, setEmail] = useState("");
+  const {
+    isOpen,
+    onClose,
+    handlePasswordReset,
+    resetPasswordEmail,
+    resetPasswordSuccess,
+    resetPasswordError,
+    setResetPasswordEmail,
+  } = props;
 
   return (
     <div
@@ -25,17 +36,25 @@ const resetPassword: FC<resetPasswordProps> = (props) => {
         <div className={`${styles.inputDiv}`}>
           <input
             type="email"
-            value={email}
+            value={resetPasswordEmail}
             onChange={(e) => {
-              setEmail(e.target.value);
+              setResetPasswordEmail(e.target.value);
             }}
             placeholder="your@email.com"
             id="email"
           />
         </div>
         <div className={`${styles.buttonDiv}`}>
-          <button className={`${styles.text}`}>Reset Password</button>
+          <button onClick={handlePasswordReset} className={`${styles.text}`}>
+            Reset Password
+          </button>
         </div>
+        {resetPasswordSuccess && (
+          <p className={`${styles.success} `}>{resetPasswordSuccess}</p>
+        )}
+        {resetPasswordError && (
+          <p className={`${styles.error} `}>{resetPasswordError}</p>
+        )}
         <div className={`${styles.line} `}>
           <div />
           <button onClick={onClose}>Close</button>
