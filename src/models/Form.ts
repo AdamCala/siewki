@@ -12,7 +12,7 @@ export const authFormSchema = yup.object().shape({
   confirmPassword: yup
     .string()
     .oneOf([yup.ref("password")], "Passwords do not match")
-    .required("Confirm passowrd is required"),
+    .required("Confirm password is required"),
 });
 
 export interface AuthForm {

@@ -17,11 +17,13 @@ import {
 import { setDoc, doc } from "firebase/firestore";
 import { auth, db } from "../config/firebase";
 import { yupResolver } from "@hookform/resolvers/yup";
+import ResetPassword from "../components/resetPassword";
 
 const authPage = () => {
   const [authType, setAuthType] = useState<"login" | "sign-up">("login");
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<null | string>(null);
+  const [resetPassword, setResetPassword] = useState(false);
 
   const dispatch = useAppDispatch();
 
@@ -101,6 +103,10 @@ const authPage = () => {
 
   return (
     <>
+      <ResetPassword
+        isOpen={resetPassword}
+        onClose={() => setResetPassword(false)}
+      />
       <div
         className={`${styles.main} w-screen h-screen flex justify-evenly items-center flex-col`}
       >
@@ -195,7 +201,13 @@ const authPage = () => {
 
             <div className={`${styles.line} `}>
               <div />
-              <button className="text-center">Forgot Password</button>
+              <button
+                type="button"
+                onClick={() => setResetPassword(true)}
+                className="text-center"
+              >
+                Forgot Password
+              </button>
               <div />
             </div>
           </div>
