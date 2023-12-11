@@ -2,10 +2,12 @@ import styles from "../styles/auth/index.module.scss";
 import Mail from "../components/icons/email";
 import Google from "../components/icons/google";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+
 import { AuthForm, authFormSchema } from "../models/Form";
-import { useAppDispatch } from "../hooks/storeHook";
+import { useAppDispatch, useAppSelector } from "../hooks/storeHook";
 import { login } from "../features/authSlice";
 
 import {
@@ -34,7 +36,15 @@ const authPage = () => {
     null
   );
 
+  const { user } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (Boolean(user)) {
+      navigate("/siewki");
+    }
+  }, [user, navigate]);
 
   const handlePasswordReset = async () => {
     if (!resetPasswordEmail.length) return;
