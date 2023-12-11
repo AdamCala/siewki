@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import Root from "./routes/root";
 import Siewki from "./routes/siewki";
 import AuthPage from "./routes/authPage";
+import Profile from "./routes/profile";
 
 const App = () => {
   return (
@@ -10,6 +11,7 @@ const App = () => {
         <Route path="/" element={<Root />} />
         <Route path="/siewki" element={<Siewki />} />
         <Route path="/auth" element={<AuthPage />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </>
   );

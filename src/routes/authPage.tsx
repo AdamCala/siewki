@@ -21,6 +21,7 @@ import { sendPasswordResetEmail } from "firebase/auth";
 import { auth, db } from "../config/firebase";
 import { yupResolver } from "@hookform/resolvers/yup";
 import ResetPassword from "../components/resetPassword";
+import DesktopBackground from "../components/assets/desktopBackground";
 
 const authPage = () => {
   const [authType, setAuthType] = useState<"login" | "sign-up">("login");
@@ -42,7 +43,7 @@ const authPage = () => {
 
   useEffect(() => {
     if (Boolean(user)) {
-      navigate("/siewki");
+      navigate("/profile");
     }
   }, [user, navigate]);
 
@@ -136,6 +137,9 @@ const authPage = () => {
 
   return (
     <>
+      <DesktopBackground
+        className={`${styles.background_svg} absolute bottom-0 z-10 pointer-events-none`}
+      />
       <ResetPassword
         resetPasswordEmail={resetPasswordEmail}
         resetPasswordSuccess={resetPasswordSuccess}
@@ -146,7 +150,7 @@ const authPage = () => {
         handlePasswordReset={handlePasswordReset}
       />
       <div
-        className={`${styles.main} w-screen h-screen flex justify-evenly items-center flex-col`}
+        className={`${styles.main} w-screen h-screen flex justify-evenly items-center flex-row`}
       >
         <form onSubmit={handleSubmit(handleFormSubmit)}>
           {errorMessage && (
@@ -250,6 +254,8 @@ const authPage = () => {
             </div>
           </div>
         </form>
+        <div className={`${styles.div}`}></div>
+        <div></div>
         <div></div>
       </div>
     </>
