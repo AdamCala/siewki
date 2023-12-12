@@ -57,7 +57,10 @@ const Root = () => {
                 whileHover={{ scale: 1.05 }}
                 className="w-fit h-fit cursor-pointer"
               >
-                <Logo onClick={handleLogoClick}></Logo>
+                <Logo
+                  className={`${styles.logo} `}
+                  onClick={handleLogoClick}
+                ></Logo>
               </motion.div>
             )}
           </motion.div>

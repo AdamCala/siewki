@@ -1,5 +1,6 @@
 import { FC } from "react";
 import styles from "../styles/components/resetPassword.module.scss";
+import Logo from "./icons/logo";
 
 interface resetPasswordProps {
   isOpen: boolean;
@@ -28,10 +29,13 @@ const resetPassword: FC<resetPasswordProps> = (props) => {
       style={{ transform: `translateY(${isOpen ? "0%" : "-100%"})` }}
     >
       <div className={`${styles.main}`}>
-        <div className={`${styles.line} `}>
-          <div />
-          <h1 className="text-center">Password Reset</h1>
-          <div />
+        <div className={`${styles.forgot} `}>
+          <Logo className={`${styles.logo} `} />
+          <h1 className="text-center">Forgot your password?</h1>
+          <p>
+            Enter your email adress and we will send you instructions to reset
+            your password
+          </p>
         </div>
         <div className={`${styles.inputDiv}`}>
           <input
@@ -57,7 +61,9 @@ const resetPassword: FC<resetPasswordProps> = (props) => {
         )}
         <div className={`${styles.line} `}>
           <div />
-          <button onClick={onClose}>Close</button>
+          <button className="my-5" onClick={onClose}>
+            Close
+          </button>
           <div />
         </div>
       </div>
