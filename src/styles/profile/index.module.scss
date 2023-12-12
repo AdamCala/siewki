@@ -1,9 +1,48 @@
 @import "../../styles/breakpoints.scss";
 @import "../../styles/vars.scss";
 
-.main_l {
+@mixin flexRule($justify: center, $align: center) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+.main {
   background-color: $blue;
 }
-.main_r {
+
+.circle {
+  position: absolute;
+  left: 7vh;
+  top: 7vh;
+  width: 30vh;
+  height: 30vh;
   background-color: $light-blue;
+  .circle_md {
+    width: 15vh;
+    height: 15vh;
+    background-color: $light-blue;
+    position: relative;
+    top: -3vh;
+    left: 34vh;
+    @include flexRule();
+    .icon {
+      width: 10vh;
+      color: $light-navy;
+    }
+  }
+  .circle_sm {
+    position: relative;
+    top: 2vh;
+    left: 33vh;
+    right: 20vh;
+    width: 10vh;
+    height: 10vh;
+    background-color: $light-blue;
+    @include flexRule();
+    .icon {
+      width: 7vh;
+      color: $light-navy;
+    }
+  }
 }
