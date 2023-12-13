@@ -2,5 +2,10 @@
 @import "../../styles/vars.scss";
 
 .main {
+  font-family: "Roboto";
   background-color: $blue;
+  h1 {
+    color: $navy;
+    font-size: x-large;
+  }
 }
