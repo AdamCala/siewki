@@ -61,20 +61,31 @@
 
 .tray_container {
   position: absolute;
-  padding-top: 7vh;
-  height: 100vw;
-  top: 0;
+  top: 7vh;
+  padding-top: 1vh;
+  height: calc(100vh - 7vh);
   right: 0;
+  overflow-y: auto;
   div {
     margin-bottom: 5vh;
   }
+}
+.tray_container::-webkit-scrollbar {
+  width: 1vh;
+}
+.tray_container::-webkit-scrollbar-track {
+  background-color: $blue;
+}
+.tray_container::-webkit-scrollbar-thumb {
+  border-radius: 0.5vh;
+  background-color: rgba($light-navy, 0.75);
 }
 
 .bluring_div {
   position: absolute;
   bottom: 0;
-  right: 0;
+  right: 1vh;
   width: 70vh;
   height: 7vh;
-  backdrop-filter: blur(0.2vh);
+  backdrop-filter: blur(0.1vh);
 }

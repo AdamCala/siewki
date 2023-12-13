@@ -5,12 +5,15 @@
   background-color: $light-blue;
   width: 70vh;
   height: 13vh;
+  display: flex;
+  justify-content: end;
+  align-items: end;
 }
 
 .icon {
-  margin-top: 6vh;
-  position: fixed;
-  right: 1vh;
+  margin-right: 4vh;
+  margin-bottom: 2vh;
+  position: relative;
   height: 6vh;
   color: $blue;
 }

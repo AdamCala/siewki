@@ -65,11 +65,13 @@ const profile = () => {
         </div>
         <div className={`${styles.tray_container}`}>
           <TrayListing areSettingsOpen={openSettings} />
+          {/* <TrayListing areSettingsOpen={openSettings} /> */}
+          {/* <TrayListing areSettingsOpen={openSettings} />
           <TrayListing areSettingsOpen={openSettings} />
           <TrayListing areSettingsOpen={openSettings} />
           <TrayListing areSettingsOpen={openSettings} />
           <TrayListing areSettingsOpen={openSettings} />
-          <TrayListing areSettingsOpen={openSettings} />
+          <TrayListing areSettingsOpen={openSettings} /> */}
         </div>
         <div className={`${styles.bluring_div}`} />
       </div>
