@@ -43,6 +43,7 @@
     color: $light-navy;
   }
 }
+
 .circle_sm {
   position: relative;
   top: 5vh;
@@ -56,4 +57,24 @@
     width: 7vh;
     color: $light-navy;
   }
+}
+
+.tray_container {
+  position: absolute;
+  padding-top: 7vh;
+  height: 100vw;
+  top: 0;
+  right: 0;
+  div {
+    margin-bottom: 5vh;
+  }
+}
+
+.bluring_div {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 70vh;
+  height: 7vh;
+  backdrop-filter: blur(0.2vh);
 }

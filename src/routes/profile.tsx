@@ -10,6 +10,7 @@ import { signOut } from "firebase/auth";
 import { auth } from "../config/firebase";
 import { logout } from "../features/authSlice";
 import SettingsPage from "../components/settingsPage";
+import TrayListing from "../components/assets/trayListing";
 
 const profile = () => {
   const { user } = useAppSelector((state) => state.auth);
@@ -62,6 +63,15 @@ const profile = () => {
         >
           <Settings className={`${styles.icon}`} />
         </div>
+        <div className={`${styles.tray_container}`}>
+          <TrayListing areSettingsOpen={openSettings} />
+          <TrayListing areSettingsOpen={openSettings} />
+          <TrayListing areSettingsOpen={openSettings} />
+          <TrayListing areSettingsOpen={openSettings} />
+          <TrayListing areSettingsOpen={openSettings} />
+          <TrayListing areSettingsOpen={openSettings} />
+        </div>
+        <div className={`${styles.bluring_div}`} />
       </div>
     </>
   );

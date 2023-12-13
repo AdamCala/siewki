@@ -16,7 +16,7 @@ const settingsPage: FC<settingsProps> = (props) => {
       <div className={`${styles.main}`}>
         <div className={`${styles.line} `}>
           <div />
-          <button className="my-5" onClick={onClose}>
+          <button className={`my-5`} onClick={onClose}>
             Close
           </button>
           <div />
