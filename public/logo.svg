@@ -1,6 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<svg width="478" height="512" viewBox="0 0 478 512" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://web.resource.org/cc/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape">
-<rect y="152" width="239" height="288" fill="#DCE4FE"/>
+<svg width="478" height="512" viewBox="0 0 478 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect y="152" width="251" height="288" fill="#DCE4FE"/>
 <rect x="239" y="152" width="239" height="288" fill="#C5D5FD"/>
 <path d="M262.461 268.698C256.179 304.323 279.874 338.786 315.499 345.068C351.212 349.842 382.202 320.784 393.775 269.513C407.537 208.541 426.097 215.809 332.688 218.632C296.512 219.361 268.625 233.737 262.461 268.698Z" fill="#BBE149"/>
 <path d="M262.461 268.698C256.179 304.323 279.874 338.786 315.499 345.068C351.212 349.842 382.202 320.784 393.775 269.513C407.537 208.541 426.097 215.809 332.688 218.632C296.512 219.361 268.625 233.737 262.461 268.698Z" fill="#7AB83E"/>
@@ -11,11 +10,11 @@
 <rect x="223" y="362" width="16" height="78" fill="#79B83B"/>
 <rect x="239" y="362" width="16" height="78" fill="#56995E"/>
 <path d="M239 440H478V468C478 492.301 458.301 512 434 512H239V440Z" fill="#A7B9E4"/>
-<path d="M0 440H239V512H44C19.6995 512 0 492.301 0 468V440Z" fill="#C5D5FD"/>
-<path d="M0 85C0 60.6995 19.6995 41 44 41H239V152H0V85Z" fill="#BBE149"/>
-<path d="M239 41H434C458.301 41 478 60.6995 478 85V152H239V41Z" fill="#79B83B"/>
+<path d="M0 440H255V512H44C19.6995 512 0 492.301 0 468V440Z" fill="#C5D5FD"/>
+<path d="M0 85C0 60.6995 19.6995 41 44 41H251V152H0V85Z" fill="#BBE149"/>
 <rect x="352" width="30" height="111" rx="14" fill="#424765"/>
-<path d="M224 14C224 6.26801 230.268 0 238 0H239V111H238C230.268 111 224 104.732 224 97V14Z" fill="#535E7E"/>
+<path d="M224 14C224 6.26801 230.268 0 238 0H239C241.761 0 244 2.23858 244 5V111H238C230.268 111 224 104.732 224 97V14Z" fill="#535E7E"/>
+<path d="M239 41H434C458.301 41 478 60.6995 478 85V152H239V41Z" fill="#79B83B"/>
 <path d="M239 0H240C247.732 0 254 6.26801 254 14V97C254 104.732 247.732 111 240 111H239V0Z" fill="#424765"/>
 <rect x="96" width="30" height="111" rx="14" fill="#535E7E"/>
 </svg>
