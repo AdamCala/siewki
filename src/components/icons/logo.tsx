@@ -7,8 +7,8 @@ const SvgComponent = (props: any) => (
     fill="none"
     {...props}
   >
-    <path fill="#DCE4FE" d="M0 152h251v288H0z" />
-    <path fill="#C5D5FD" d="M239 152h239v288H239z" />
+    <path fill="#DCE4FE" d="M0 147h251v296H0z" />
+    <path fill="#C5D5FD" d="M239 147h239v298H239z" />
     <path
       fill="#BBE149"
       d="M262.461 268.698c-6.282 35.625 17.413 70.088 53.038 76.37 35.713 4.774 66.703-24.284 78.276-75.555 13.762-60.972 32.322-53.704-61.087-50.881-36.176.729-64.063 15.105-70.227 50.066Z"
@@ -35,18 +35,18 @@ const SvgComponent = (props: any) => (
     />
     <path fill="#79B83B" d="M223 362h16v78h-16z" />
     <path fill="#56995E" d="M239 362h16v78h-16z" />
+    <path fill="#C5D5FD" d="M0 440h255v72H44c-24.3 0-44-19.699-44-44v-28Z" />
+    <path fill="#BBE149" d="M0 85c0-24.3 19.7-44 44-44h207v111H0V85Z" />
     <path
       fill="#A7B9E4"
       d="M239 440h239v28c0 24.301-19.699 44-44 44H239v-72Z"
     />
-    <path fill="#C5D5FD" d="M0 440h255v72H44c-24.3 0-44-19.699-44-44v-28Z" />
-    <path fill="#BBE149" d="M0 85c0-24.3 19.7-44 44-44h207v111H0V85Z" />
-    <rect width={30} height={111} x={352} fill="#424765" rx={14} />
     <path
       fill="#535E7E"
       d="M224 14c0-7.732 6.268-14 14-14h1a5 5 0 0 1 5 5v106h-6c-7.732 0-14-6.268-14-14V14Z"
     />
     <path fill="#79B83B" d="M239 41h195c24.301 0 44 19.7 44 44v67H239V41Z" />
+    <rect width={30} height={111} x={352} fill="#424765" rx={14} />
     <path
       fill="#424765"
       d="M239 0h1c7.732 0 14 6.268 14 14v83c0 7.732-6.268 14-14 14h-1V0Z"
