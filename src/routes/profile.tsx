@@ -47,9 +47,9 @@ const profile = () => {
   };
 
   useEffect(() => {
-    // if (Boolean(!user)) {
-    //     navigate('/auth');
-    // }
+    if (Boolean(!user)) {
+      navigate("/auth");
+    }
   }, [navigate, user]);
 
   return (
