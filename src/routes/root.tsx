@@ -6,18 +6,28 @@ import { useState } from "react";
 import { backInOut } from "framer-motion/dom";
 import { useAppSelector } from "../hooks/storeHook";
 
+/**
+ * Component representing the root view of the application.
+ * Uses Framer Motion for animations and React Router for navigation.
+ * @returns {JSX.Element} The JSX element representing the root view.
+ */
 const Root = () => {
   const navigate = useNavigate();
   const [isVisible, setIsVisible] = useState(true);
   const [animate, setAnimate] = useState(0);
 
+  // Selects user information from the Redux store
   const { user } = useAppSelector((state) => state.auth);
 
+  /**
+   * Event handler for logo click.
+   * Initiates exit animation, updates state, and navigates to the appropriate route.
+   */
   const handleLogoClick = () => {
     setAnimate(1);
     setIsVisible(false);
     setTimeout(() => {
-      if (Boolean(!user)) {
+      if (!user) {
         navigate("/auth");
       } else {
         navigate("/profile");
@@ -27,7 +37,10 @@ const Root = () => {
 
   return (
     <div className={`w-full h-full flex flex-row ${styles.main}`}>
+      {/* Background element on the right side */}
       <div className={`absolute w-screen h-screen z-0 ${styles.right}`}></div>
+
+      {/* Left side with animated text */}
       <AnimatePresence mode="wait">
         <motion.div
           key={animate}
@@ -45,12 +58,15 @@ const Root = () => {
             {isVisible && <motion.p>SIEWKI</motion.p>}
           </motion.p>
 
+          {/* Placeholder div for spacing */}
           <div className="w-full h-3/6 z-10"></div>
         </motion.div>
       </AnimatePresence>
 
+      {/* Right side with logo */}
       <div className="absolute w-full h-full flex flex-row z-10">
         <div className="w-1/3 z-10"></div>
+
         <AnimatePresence mode="popLayout">
           <motion.div
             key={animate}
@@ -64,6 +80,7 @@ const Root = () => {
                 whileHover={{ scale: 1.05 }}
                 className="w-fit h-fit cursor-pointer"
               >
+                {/* Logo component with click animation */}
                 <Logo
                   className={`${styles.logo} `}
                   onClick={handleLogoClick}

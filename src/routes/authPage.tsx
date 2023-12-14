@@ -23,7 +23,14 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import ResetPassword from "../components/resetPassword";
 import DesktopBackground from "../components/assets/desktopBackground";
 
-const authPage = () => {
+/**
+ * Component representing the authentication page.
+ * Handles user login, sign-up, and password reset functionalities.
+ * Integrates with Firebase authentication and Firestore for user data storage.
+ * Uses Yup for form validation.
+ * @returns {JSX.Element} The JSX element representing the authentication page.
+ */
+const AuthPage = () => {
   const [authType, setAuthType] = useState<"login" | "sign-up">("login");
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<null | string>(null);
@@ -41,12 +48,18 @@ const authPage = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
+  // Redirects to the profile page after successful authentication
   useEffect(() => {
     if (Boolean(user)) {
       navigate("/profile");
     }
   }, [user, navigate]);
 
+  /**
+   * Handles the password reset process.
+   * Sends a reset email and updates state based on success or error.
+   * @returns {Promise<void>} - A Promise that resolves when the password reset is complete.
+   * */
   const handlePasswordReset = async () => {
     if (!resetPasswordEmail.length) return;
     try {
@@ -61,6 +74,10 @@ const authPage = () => {
     }
   };
 
+  /**
+   * Signs in the user with Google authentication.
+   * @returns {Promise<void>} - A Promise that resolves when the sign up is complete.
+   * */
   const signInWithGoogle = async () => {
     const provider = new GoogleAuthProvider();
     try {
@@ -79,22 +96,35 @@ const authPage = () => {
     }
   };
 
-  const handleFormSubmit = async (data: AuthForm) => {
+  /**
+   * Handles form submission for login or sign-up.
+   * @param {AuthForm} data - Form data containing email and password.
+   * @returns {Promise<void>} - A Promise that resolves when the form submission is complete.
+   */
+  const handleFormSubmit = async (data: AuthForm): Promise<void> => {
+    // Clear any existing error messages
     setErrorMessage(null);
+
+    // Set loading state to indicate form submission is in progress
     setLoading(true);
+
     const { email, password } = data;
-    if (authType == "sign-up") {
+
+    if (authType === "sign-up") {
       try {
+        // Attempt to create a new user with Firebase authentication
         const { user } = await createUserWithEmailAndPassword(
           auth,
           email,
           password
         );
 
+        // Create a user document in Firestore with the user's email
         await setDoc(doc(db, "users", user.uid), { email });
-        setLoading(false);
 
-        if (user && user.email)
+        // Dispatch a login action to update Redux state upon successful sign-up
+        setLoading(false);
+        if (user && user.email) {
           dispatch(
             login({
               email: user.email,
@@ -102,25 +132,49 @@ const authPage = () => {
               photoUrl: user.photoURL || null,
             })
           );
+        }
       } catch (error: any) {
+        // Handle errors by updating error message state
         setLoading(false);
         const errorCode = error.code;
         setErrorMessage(errorCode);
       }
     } else {
-      const { user } = await signInWithEmailAndPassword(auth, email, password);
-      setLoading(false);
-      if (user && user.email)
-        dispatch(
-          login({
-            email: user.email,
-            id: user.uid,
-            photoUrl: user.photoURL || null,
-          })
+      try {
+        // Attempt to sign in with Firebase authentication
+        const { user } = await signInWithEmailAndPassword(
+          auth,
+          email,
+          password
         );
+
+        // Dispatch a login action to update Redux state upon successful login
+        setLoading(false);
+        if (user && user.email) {
+          dispatch(
+            login({
+              email: user.email,
+              id: user.uid,
+              photoUrl: user.photoURL || null,
+            })
+          );
+        }
+      } catch (error: any) {
+        // Handle errors by updating error message state
+        setLoading(false);
+        const errorCode = error.code;
+        setErrorMessage(errorCode);
+      }
     }
   };
 
+  /**
+   * Handles the submission of the authentication form using React Hook Form.
+   * - Registers form fields and validation rules using useForm and yupResolver.
+   *
+   * @param {AuthForm} data - Form data containing email, password, and confirmPassword.
+   * @returns {Object} - React Hook Form properties for form management.
+   */
   const {
     register,
     handleSubmit,
@@ -129,6 +183,9 @@ const authPage = () => {
     resolver: yupResolver(authFormSchema),
   });
 
+  /**
+   * Toggles between login and sign-up forms.
+   */
   const handleAuthType = () => {
     setAuthType((prevAuthType) =>
       prevAuthType === "login" ? "sign-up" : "login"
@@ -137,9 +194,12 @@ const authPage = () => {
 
   return (
     <>
+      {/* Desktop background SVG */}
       <DesktopBackground
         className={`${styles.background_svg} absolute bottom-0 z-10 pointer-events-none`}
       />
+
+      {/* ResetPassword component */}
       <ResetPassword
         resetPasswordEmail={resetPasswordEmail}
         resetPasswordSuccess={resetPasswordSuccess}
@@ -149,16 +209,22 @@ const authPage = () => {
         onClose={() => setResetPassword(false)}
         handlePasswordReset={handlePasswordReset}
       />
+
+      {/* Main content of the authentication page */}
       <div
         className={`${styles.main} w-screen h-screen flex justify-evenly items-center flex-row`}
       >
+        {/* Authentication form */}
         <form onSubmit={handleSubmit(handleFormSubmit)}>
           {errorMessage && (
             <p className={`${styles.errorMsgDiv} `}>{errorMessage}</p>
           )}
+
+          {/* Login box containing form elements */}
           <div
             className={`${styles.loginBox} flex flex-col items-center justify-evenly`}
           >
+            {/* Google sign-in button */}
             <div
               onClick={signInWithGoogle}
               className={`${styles.buttonDiv} hover:cursor-pointer`}
@@ -166,12 +232,15 @@ const authPage = () => {
               <Google className={`${styles.icon} `} />
               <p className={`${styles.text} `}>Login with Google</p>
             </div>
+
+            {/* Or separator */}
             <div className={`${styles.line} `}>
               <div />
               <p>Or</p>
               <div />
             </div>
 
+            {/* Email input */}
             <div className={`${styles.inputDiv} `}>
               <input
                 type="text"
@@ -187,6 +256,8 @@ const authPage = () => {
             ) : (
               <></>
             )}
+
+            {/* Password input */}
             <div className={`${styles.inputDiv} `}>
               <input
                 type="password"
@@ -202,14 +273,18 @@ const authPage = () => {
             ) : (
               <></>
             )}
-            <div className={`${styles.inputDiv} `}>
-              <input
-                type="password"
-                id="confpasswd"
-                placeholder="confirm password"
-                {...register("confirmPassword")}
-              />
-            </div>
+
+            {/* Confirm Password input for sign-up */}
+            {authType === "sign-up" && (
+              <div className={`${styles.inputDiv} `}>
+                <input
+                  type="password"
+                  id="confpasswd"
+                  placeholder="confirm password"
+                  {...register("confirmPassword")}
+                />
+              </div>
+            )}
             {errors.confirmPassword ? (
               <span className={`${styles.errorMsg} `}>
                 {errors.confirmPassword.message}
@@ -217,6 +292,8 @@ const authPage = () => {
             ) : (
               <></>
             )}
+
+            {/* Submit button */}
             <button
               disabled={loading}
               type="submit"
@@ -227,10 +304,12 @@ const authPage = () => {
                 {authType === "login" ? "Login" : "Sign up"} with email
               </p>
             </button>
+
+            {/* Prompt to switch between login and sign-up forms */}
             {authType === "login" ? (
               <div className={`${styles.promptDiv} `}>
                 <p className="hover:cursor-pointer" onClick={handleAuthType}>
-                  Don't have account yet? Sign Up
+                  Don't have an account yet? Sign Up
                 </p>
               </div>
             ) : (
@@ -241,6 +320,7 @@ const authPage = () => {
               </div>
             )}
 
+            {/* Password reset link */}
             <div className={`${styles.line} `}>
               <div />
               <button
@@ -254,6 +334,8 @@ const authPage = () => {
             </div>
           </div>
         </form>
+
+        {/* Empty divs for spacing */}
         <div className={`${styles.div}`}></div>
         <div></div>
         <div></div>
@@ -262,4 +344,4 @@ const authPage = () => {
   );
 };
 
-export default authPage;
+export default AuthPage;
