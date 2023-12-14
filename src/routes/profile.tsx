@@ -6,7 +6,7 @@ import Settings from "../components/icons/settings";
 import { useAppDispatch, useAppSelector } from "../hooks/storeHook";
 import styles from "../styles/profile/index.module.scss";
 
-import { signOut } from "firebase/auth";
+import { sendPasswordResetEmail, signOut } from "firebase/auth";
 import { auth } from "../config/firebase";
 import { logout } from "../features/authSlice";
 import SettingsPage from "../components/settingsPage";
@@ -15,12 +15,35 @@ import TrayListing from "../components/assets/trayListing";
 const profile = () => {
   const { user } = useAppSelector((state) => state.auth);
   const [openSettings, setOpenSettings] = useState(false);
+
+  const [resetPasswordEmail, setResetPasswordEmail] = useState("");
+  const [resetPasswordSuccess, setResetPasswordSuccess] = useState<
+    string | null
+  >(null);
+  const [resetPasswordError, setResetPasswordError] = useState<string | null>(
+    null
+  );
+
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const handleLogout = async () => {
     await signOut(auth);
     dispatch(logout());
+  };
+
+  const handlePasswordReset = async () => {
+    if (!resetPasswordEmail.length) return;
+    try {
+      await sendPasswordResetEmail(auth, resetPasswordEmail);
+      setResetPasswordSuccess(
+        "Password reset link sent. Please check your inbox"
+      );
+      setResetPasswordError(null);
+    } catch (error: any) {
+      setResetPasswordError(error.code);
+      setResetPasswordSuccess(null);
+    }
   };
 
   useEffect(() => {
@@ -32,6 +55,12 @@ const profile = () => {
   return (
     <>
       <SettingsPage
+        setResetPasswordEmail={setResetPasswordEmail}
+        resetPasswordSuccess={resetPasswordSuccess}
+        resetPasswordError={resetPasswordError}
+        resetPasswordEmail={resetPasswordEmail}
+        handlePasswordReset={handlePasswordReset}
+        user={user}
         isOpen={openSettings}
         onClose={() => setOpenSettings(false)}
       />
