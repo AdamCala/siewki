@@ -1,34 +1,42 @@
-<img align="left" style="width:96px" src="https://raw.githubusercontent.com/AdamCala/siewki/main/public/logo.svg" />
+<img align="left" style="width:64px" src="https://raw.githubusercontent.com/AdamCala/siewki/main/public/logo.svg" />
 
-# Siewki
+<h1>SIEWKI</h1>
 
 <br />
 
 **A web application for tracking the growth of plant seedlings**
 
----
-
-<br />
-
 ## Tech Stack
 
 <br />
-
-### Database and Authentication
-
-<p align="left"><a href="https://firebase.google.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/firebase/firebase-icon.svg" alt="firebase" width="40" height="40"/> </a></p>
-
-### Frontend Development and Deployment
-
-<p align="left"><a href="https://www.figma.com/" target="_blank" rel="noreferrer"><img src="https://www.vectorlogo.zone/logos/figma/figma-icon.svg" alt="figma" width="40" height="40"/></a><a href="https://reactjs.org/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" alt="react" width="40" height="40"/></a><a href="https://redux.js.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/redux/redux-original.svg" alt="redux" width="40" height="40"/></a><a href="https://sass-lang.com" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/sass/sass-original.svg" alt="sass" width="40" height="40"/></a><a href="https://tailwindcss.com/" target="_blank" rel="noreferrer"><img src="https://www.vectorlogo.zone/logos/tailwindcss/tailwindcss-icon.svg" alt="tailwind" width="40" height="40"/></a><a href="https://www.typescriptlang.org/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg" alt="typescript" width="40" height="40"/></a><a href="https://vitejs.dev/" target="_blank" rel="noreferrer"> <img src="https://vectorwiki.com/images/bjlcA__vitejs.svg" alt="typescript" width="40" height="40"/></a></p>
-
----
-
-</br>
+<p align="left">
+<a href="https://firebase.google.com/" target="_blank" rel="noreferrer">
+    <img src="https://www.vectorlogo.zone/logos/firebase/firebase-icon.svg" alt="firebase" width="40" height="40"/>
+</a>&nbsp;
+  <a href="https://www.figma.com/" target="_blank" rel="noreferrer">
+    <img src="https://www.vectorlogo.zone/logos/figma/figma-icon.svg" alt="figma" width="40" height="40"/>
+  </a>&nbsp;
+  <a href="https://reactjs.org/" target="_blank" rel="noreferrer">
+    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" alt="react" width="40" height="40"/>
+  </a>&nbsp;
+  <a href="https://redux.js.org" target="_blank" rel="noreferrer">
+    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/redux/redux-original.svg" alt="redux" width="40" height="40"/>
+  </a>&nbsp;
+  <a href="https://sass-lang.com" target="_blank" rel="noreferrer">
+    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/sass/sass-original.svg" alt="sass" width="40" height="40"/>
+  </a>&nbsp;
+  <a href="https://tailwindcss.com/" target="_blank" rel="noreferrer">
+    <img src="https://www.vectorlogo.zone/logos/tailwindcss/tailwindcss-icon.svg" alt="tailwind" width="40" height="40"/>
+  </a>&nbsp;
+  <a href="https://www.typescriptlang.org/" target="_blank" rel="noreferrer">
+    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg" alt="typescript" width="40" height="40"/>
+  </a>&nbsp;
+  <a href="https://vitejs.dev/" target="_blank" rel="noreferrer">
+    <img src="https://vectorwiki.com/images/bjlcA__vitejs.svg" alt="vitejs" width="40" height="40"/>
+  </a>
+</p>
 
 ## Run Locally
-
-</br>
 
 Clone the project
 
@@ -68,13 +76,7 @@ Start the server
   npm run dev
 ```
 
----
-
-</br>
-
 ## Authors
-
-</br>
 
 - [@AdamCala](https://github.com/AdamCala)
   </br>
