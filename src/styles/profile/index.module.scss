@@ -9,6 +9,7 @@
 
 .main {
   background-color: $blue;
+  font-family: "Roboto";
 }
 
 .circle {
@@ -18,31 +19,73 @@
   width: 30vh;
   height: 30vh;
   background-color: $light-blue;
-  .circle_md {
-    width: 15vh;
-    height: 15vh;
-    background-color: $light-blue;
-    position: relative;
-    top: -3vh;
-    left: 34vh;
-    @include flexRule();
-    .icon {
-      width: 10vh;
-      color: $light-navy;
-    }
+  img,
+  div {
+    color: $navy;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: normal;
+    font-size: 13vh;
+    border: 0.7vh solid $blue;
   }
-  .circle_sm {
-    position: relative;
-    top: 2vh;
-    left: 33vh;
-    right: 20vh;
+}
+.circle_md {
+  width: 15vh;
+  height: 15vh;
+  background-color: $light-blue;
+  position: relative;
+  top: 3vh;
+  left: 42vh;
+  @include flexRule();
+  .icon {
     width: 10vh;
-    height: 10vh;
-    background-color: $light-blue;
-    @include flexRule();
-    .icon {
-      width: 7vh;
-      color: $light-navy;
-    }
+    color: $light-navy;
   }
+}
+
+.circle_sm {
+  position: relative;
+  top: 5vh;
+  left: 40vh;
+  right: 20vh;
+  width: 10vh;
+  height: 10vh;
+  background-color: $light-blue;
+  @include flexRule();
+  .icon {
+    width: 7vh;
+    color: $light-navy;
+  }
+}
+
+.tray_container {
+  position: absolute;
+  top: 7vh;
+  padding-top: 1vh;
+  height: calc(100vh - 7vh);
+  right: 0;
+  overflow-y: auto;
+  div {
+    margin-bottom: 5vh;
+  }
+}
+.tray_container::-webkit-scrollbar {
+  width: 1vh;
+}
+.tray_container::-webkit-scrollbar-track {
+  background-color: $blue;
+}
+.tray_container::-webkit-scrollbar-thumb {
+  border-radius: 0.5vh;
+  background-color: rgba($light-navy, 0.75);
+}
+
+.bluring_div {
+  position: absolute;
+  bottom: 0;
+  right: 1vh;
+  width: 70vh;
+  height: 7vh;
+  backdrop-filter: blur(0.1vh);
 }

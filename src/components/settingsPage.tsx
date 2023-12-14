@@ -1,10 +1,11 @@
 import { FC } from "react";
-import styles from "../styles/components/resetPassword.module.scss";
-import Logo from "./icons/logo";
+import styles from "../styles/components/settingsPage.module.scss";
+import { User } from "../models/User";
 
-interface resetPasswordProps {
+interface settingsProps {
   isOpen: boolean;
   onClose: () => void;
+  user: User | null;
   handlePasswordReset: () => Promise<void>;
   resetPasswordEmail: string;
   resetPasswordSuccess: null | string;
@@ -12,30 +13,42 @@ interface resetPasswordProps {
   setResetPasswordEmail: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const resetPassword: FC<resetPasswordProps> = (props) => {
+const settingsPage: FC<settingsProps> = (props) => {
   const {
     isOpen,
     onClose,
+    user,
     handlePasswordReset,
     resetPasswordEmail,
-    resetPasswordSuccess,
     resetPasswordError,
+    resetPasswordSuccess,
     setResetPasswordEmail,
   } = props;
-
   return (
     <div
       className={`fixed top-0 left-0 right-0 bottom-0 z-10 flex justify-center items-center backdrop-blur-sm`}
       style={{ transform: `translateY(${isOpen ? "0%" : "-100%"})` }}
     >
       <div className={`${styles.main}`}>
-        <div className={`${styles.forgot} `}>
-          <Logo className={`${styles.logo} `} />
-          <h1 className="text-center">Forgot your password?</h1>
-          <p>
-            Enter your email adress and we will send you instructions to reset
-            your password
-          </p>
+        <div className={`${styles.outer_circle}`}>
+          <div
+            className={`${styles.circle} rounded-full flex justify-center items-center`}
+          >
+            {user?.photoUrl ? (
+              <img
+                className="w-4/5 rounded-full"
+                src={user.photoUrl}
+                alt="avatar"
+              />
+            ) : (
+              <div className="w-4/5 h-4/5 rounded-full">
+                {user?.email[0].toUpperCase()}
+              </div>
+            )}
+          </div>
+          <div>
+            <p>{user?.email}</p>
+          </div>
         </div>
         <div className={`${styles.inputDiv}`}>
           <input
@@ -48,10 +61,11 @@ const resetPassword: FC<resetPasswordProps> = (props) => {
             id="email"
           />
         </div>
-        <div className={`${styles.buttonDiv}`}>
-          <button onClick={handlePasswordReset} className={`${styles.text}`}>
-            Reset Password
-          </button>
+        <div
+          onClick={handlePasswordReset}
+          className={`${styles.buttonDiv} cursor-pointer`}
+        >
+          <p className={`my-5`}>Change Password</p>
         </div>
         {resetPasswordSuccess && (
           <p className={`${styles.success} `}>{resetPasswordSuccess}</p>
@@ -59,16 +73,12 @@ const resetPassword: FC<resetPasswordProps> = (props) => {
         {resetPasswordError && (
           <p className={`${styles.error} `}>{resetPasswordError}</p>
         )}
-        <div className={`${styles.line} `}>
-          <div />
-          <button className="my-5" onClick={onClose}>
-            Close
-          </button>
-          <div />
+        <div onClick={onClose} className={`${styles.buttonDiv} cursor-pointer`}>
+          <p className={`my-5`}>Close</p>
         </div>
       </div>
     </div>
   );
 };
 
-export default resetPassword;
+export default settingsPage;

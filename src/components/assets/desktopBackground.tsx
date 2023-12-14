@@ -4,7 +4,7 @@ const desktopBackground = (props: any) => (
     viewBox="0 0 1200 500"
     width="100%"
     height="100%"
-    style={{ bottom: 0 }}
+    // style={{ bottom: 0, left: 0 }}
     fill="none"
     {...props}
   >

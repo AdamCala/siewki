@@ -1,0 +1,19 @@
+@import "../../styles/breakpoints.scss";
+@import "../../styles/vars.scss";
+
+.main {
+  background-color: $light-blue;
+  width: 70vh;
+  height: 13vh;
+  display: flex;
+  justify-content: end;
+  align-items: end;
+}
+
+.icon {
+  margin-right: 4vh;
+  margin-bottom: 2vh;
+  position: relative;
+  height: 6vh;
+  color: $blue;
+}

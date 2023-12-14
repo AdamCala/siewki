@@ -1,23 +1,108 @@
-import DesktopBackground from "../components/assets/desktopBackground";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import Logout from "../components/icons/logout";
 import Settings from "../components/icons/settings";
+import { useAppDispatch, useAppSelector } from "../hooks/storeHook";
 import styles from "../styles/profile/index.module.scss";
 
+import { sendPasswordResetEmail, signOut } from "firebase/auth";
+import { auth } from "../config/firebase";
+import { logout } from "../features/authSlice";
+import SettingsPage from "../components/settingsPage";
+import TrayListing from "../components/assets/trayListing";
+
 const profile = () => {
+  const { user } = useAppSelector((state) => state.auth);
+  const [openSettings, setOpenSettings] = useState(false);
+
+  const [resetPasswordEmail, setResetPasswordEmail] = useState("");
+  const [resetPasswordSuccess, setResetPasswordSuccess] = useState<
+    string | null
+  >(null);
+  const [resetPasswordError, setResetPasswordError] = useState<string | null>(
+    null
+  );
+
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await signOut(auth);
+    dispatch(logout());
+  };
+
+  const handlePasswordReset = async () => {
+    if (!resetPasswordEmail.length) return;
+    try {
+      await sendPasswordResetEmail(auth, resetPasswordEmail);
+      setResetPasswordSuccess(
+        "Password reset link sent. Please check your inbox"
+      );
+      setResetPasswordError(null);
+    } catch (error: any) {
+      setResetPasswordError(error.code);
+      setResetPasswordSuccess(null);
+    }
+  };
+
+  useEffect(() => {
+    if (Boolean(!user)) {
+      navigate("/auth");
+    }
+  }, [navigate, user]);
+
   return (
     <>
-      <DesktopBackground
-        className={`${styles.background_svg} absolute bottom-0`}
+      <SettingsPage
+        setResetPasswordEmail={setResetPasswordEmail}
+        resetPasswordSuccess={resetPasswordSuccess}
+        resetPasswordError={resetPasswordError}
+        resetPasswordEmail={resetPasswordEmail}
+        handlePasswordReset={handlePasswordReset}
+        user={user}
+        isOpen={openSettings}
+        onClose={() => setOpenSettings(false)}
       />
       <div className={`${styles.main} w-screen h-screen`}>
-        <div className={`${styles.circle} rounded-full`}>
-          <div className={`${styles.circle_md} rounded-full`}>
-            <Logout className={`${styles.icon}`} />
-          </div>
-          <div className={`${styles.circle_sm} rounded-full`}>
-            <Settings className={`${styles.icon}`} />
-          </div>
+        <div
+          className={`${styles.circle} rounded-full flex justify-center items-center`}
+        >
+          {user?.photoUrl ? (
+            <img
+              className="w-4/5 rounded-full"
+              src={user.photoUrl}
+              alt="avatar"
+            />
+          ) : (
+            <div className="w-4/5 h-4/5 rounded-full">
+              {user?.email[0].toUpperCase()}
+            </div>
+          )}
         </div>
+        <div
+          onClick={handleLogout}
+          className={`${styles.circle_md} rounded-full cursor-pointer`}
+        >
+          <Logout className={`${styles.icon}`} />
+        </div>
+        <div
+          onClick={() => setOpenSettings(true)}
+          className={`${styles.circle_sm} rounded-full cursor-pointer`}
+        >
+          <Settings className={`${styles.icon}`} />
+        </div>
+        <div className={`${styles.tray_container}`}>
+          <TrayListing areSettingsOpen={openSettings} />
+          {/* <TrayListing areSettingsOpen={openSettings} /> */}
+          {/* <TrayListing areSettingsOpen={openSettings} />
+          <TrayListing areSettingsOpen={openSettings} />
+          <TrayListing areSettingsOpen={openSettings} />
+          <TrayListing areSettingsOpen={openSettings} />
+          <TrayListing areSettingsOpen={openSettings} />
+          <TrayListing areSettingsOpen={openSettings} /> */}
+        </div>
+        <div className={`${styles.bluring_div}`} />
       </div>
     </>
   );

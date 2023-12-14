@@ -4,17 +4,24 @@ import styles from "../styles/index.module.scss";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { backInOut } from "framer-motion/dom";
+import { useAppSelector } from "../hooks/storeHook";
 
 const Root = () => {
   const navigate = useNavigate();
   const [isVisible, setIsVisible] = useState(true);
   const [animate, setAnimate] = useState(0);
 
+  const { user } = useAppSelector((state) => state.auth);
+
   const handleLogoClick = () => {
     setAnimate(1);
     setIsVisible(false);
     setTimeout(() => {
-      navigate("/auth");
+      if (Boolean(!user)) {
+        navigate("/auth");
+      } else {
+        navigate("/profile");
+      }
     }, 1800);
   };
 
