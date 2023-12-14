@@ -12,7 +12,12 @@ import { logout } from "../features/authSlice";
 import SettingsPage from "../components/settingsPage";
 import TrayListing from "../components/assets/trayListing";
 
-const profile = () => {
+/**
+ * Component representing the user profile page.
+ * Displays user information, allows logout, and provides options for password reset and settings.
+ * @returns {JSX.Element} The JSX element representing the user profile page.
+ */
+const Profile = () => {
   const { user } = useAppSelector((state) => state.auth);
   const [openSettings, setOpenSettings] = useState(false);
 
@@ -27,11 +32,19 @@ const profile = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
+  /**
+   * Handles the logout process.
+   * Signs out the user and dispatches the logout action to update the Redux store.
+   */
   const handleLogout = async () => {
     await signOut(auth);
     dispatch(logout());
   };
 
+  /**
+   * Handles the password reset process.
+   * Sends a password reset email to the user's email address.
+   */
   const handlePasswordReset = async () => {
     if (!resetPasswordEmail.length) return;
     try {
@@ -46,14 +59,16 @@ const profile = () => {
     }
   };
 
+  // Redirects to the authentication page if the user is not authenticated
   useEffect(() => {
-    if (Boolean(!user)) {
+    if (!user) {
       navigate("/auth");
     }
   }, [navigate, user]);
 
   return (
     <>
+      {/* SettingsPage component for handling user settings */}
       <SettingsPage
         setResetPasswordEmail={setResetPasswordEmail}
         resetPasswordSuccess={resetPasswordSuccess}
@@ -65,6 +80,7 @@ const profile = () => {
         onClose={() => setOpenSettings(false)}
       />
       <div className={`${styles.main} w-screen h-screen`}>
+        {/* User avatar or initial letter */}
         <div
           className={`${styles.circle} rounded-full flex justify-center items-center`}
         >
@@ -80,32 +96,34 @@ const profile = () => {
             </div>
           )}
         </div>
+
+        {/* Logout button */}
         <div
           onClick={handleLogout}
           className={`${styles.circle_md} rounded-full cursor-pointer`}
         >
           <Logout className={`${styles.icon}`} />
         </div>
+
+        {/* Settings button */}
         <div
           onClick={() => setOpenSettings(true)}
           className={`${styles.circle_sm} rounded-full cursor-pointer`}
         >
           <Settings className={`${styles.icon}`} />
         </div>
+
+        {/* Container for tray listings */}
         <div className={`${styles.tray_container}`}>
           <TrayListing areSettingsOpen={openSettings} />
-          {/* <TrayListing areSettingsOpen={openSettings} /> */}
-          {/* <TrayListing areSettingsOpen={openSettings} />
-          <TrayListing areSettingsOpen={openSettings} />
-          <TrayListing areSettingsOpen={openSettings} />
-          <TrayListing areSettingsOpen={openSettings} />
-          <TrayListing areSettingsOpen={openSettings} />
-          <TrayListing areSettingsOpen={openSettings} /> */}
+          {/* Additional TrayListing components */}
         </div>
+
+        {/* Div for blurring the background */}
         <div className={`${styles.bluring_div}`} />
       </div>
     </>
   );
 };
 
-export default profile;
+export default Profile;

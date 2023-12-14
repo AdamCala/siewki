@@ -11,11 +11,22 @@ import NotFound from "./routes/notFound";
 import { useAppDispatch } from "./hooks/storeHook";
 import { login } from "./features/authSlice";
 
+/**
+ * Main component representing the application.
+ * Manages user authentication state and renders different pages based on the route.
+ * Utilizes React Router for routing and Redux for state management.
+ */
 const App = () => {
   const dispatch = useAppDispatch();
+
+  /**
+   * Effect hook to subscribe to authentication state changes.
+   * Dispatches a login action when a user is authenticated.
+   * @returns {Function} Unsubscribe function to clean up the subscription.
+   */
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (user) => {
-      if (user && user.email)
+      if (user && user.email) {
         dispatch(
           login({
             email: user.email,
@@ -23,11 +34,18 @@ const App = () => {
             photoUrl: user?.photoURL || null,
           })
         );
+      }
     });
 
+    // Cleanup function to unsubscribe when the component is unmounted
     return () => unsubscribe();
   }, [dispatch]);
 
+  /**
+   * Renders the main application structure with React Router handling routes.
+   * Includes placeholders for different pages based on the route.
+   * @returns {JSX.Element} The JSX element representing the application structure.
+   */
   return (
     <>
       <Routes>
