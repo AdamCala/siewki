@@ -1,19 +1,75 @@
 @import "../styles/breakpoints.scss";
 @import "../styles/vars.scss";
 
-.left {
-  background-color: $blue;
+@mixin default {
+  .main {
+    display: grid;
+    height: 100vh;
+  }
+  .left {
+    background-color: $blue;
+  }
+  .right {
+    background-color: $light-blue;
+  }
+  .text {
+    font-family: "Permanent Marker", cursive;
+    letter-spacing: 0.1em;
+    font-weight: 900;
+    font-style: italic;
+    z-index: 10;
+    line-height: 1;
+    color: rgba($light-blue, 0.7);
+    text-shadow: 1px 4px 6px $blue, 0 0 0 #000, 1px 4px 6px $blue;
+    position: absolute;
+  }
+  .logo {
+    cursor: pointer;
+    position: absolute;
+    width: fit-content;
+    height: fit-content;
+    transition: transform 0.3s ease-in-out;
+  }
+  .logo:hover {
+    transform: translate(-50%, -66.666%) scale(1.05);
+  }
 }
-.right {
-  background-color: $light-blue;
-}
-.text {
-  font-family: "Permanent Marker", cursive;
-  color: rgba($light-blue, 0.7);
-  text-shadow: 1px 4px 6px $blue, 0 0 0 #000, 1px 4px 6px $blue;
-  margin-left: 20vh;
+//! desktop
+@include media(">=tablet") {
+  @include default();
+  .main {
+    grid-template-columns: 2fr 1fr;
+  }
+  .logo {
+    width: 40vh;
+    top: 55%; /* Center vertically */
+    left: 66.666%; /* Start from the center horizontally */
+    transform: translate(-50%, -66.666%);
+  }
+  .text {
+    font-size: 8rem;
+    left: 30%; /* Start from the center horizontally */
+    transform: translate(-50%, 50%);
+  }
 }
 
-.logo {
-  width: 478px;
+//! mobile
+@include media("<=tablet") {
+  @include default();
+
+  .main {
+    grid-template-columns: 1fr 1fr;
+  }
+  .logo {
+    width: 15vh;
+    width: 35vh;
+    top: 60%; /* Center vertically */
+    left: 50%; /* Start from the center horizontally */
+    transform: translate(-50%, -50%);
+  }
+  .text {
+    font-size: 4.4rem;
+    left: 50%; /* Start from the center horizontally */
+    transform: translate(-50%, 50%);
+  }
 }

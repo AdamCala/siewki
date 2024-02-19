@@ -195,9 +195,9 @@ const AuthPage = () => {
   return (
     <>
       {/* Desktop background SVG */}
-      <DesktopBackground
+      {/* <DesktopBackground
         className={`${styles.background_svg} absolute bottom-0 z-10 pointer-events-none`}
-      />
+      /> */}
 
       {/* ResetPassword component */}
       <ResetPassword
@@ -211,9 +211,7 @@ const AuthPage = () => {
       />
 
       {/* Main content of the authentication page */}
-      <div
-        className={`${styles.main} w-screen h-screen flex justify-evenly items-center flex-row`}
-      >
+      <div className={styles.main}>
         {/* Authentication form */}
         <form onSubmit={handleSubmit(handleFormSubmit)}>
           {errorMessage && (
@@ -334,11 +332,6 @@ const AuthPage = () => {
             </div>
           </div>
         </form>
-
-        {/* Empty divs for spacing */}
-        <div className={`${styles.div}`}></div>
-        <div></div>
-        <div></div>
       </div>
     </>
   );
