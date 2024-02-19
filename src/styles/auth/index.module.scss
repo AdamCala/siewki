@@ -1,126 +1,147 @@
 @import "../../styles/breakpoints.scss";
 @import "../../styles/vars.scss";
 
-.main {
-  background-color: $blue;
-  font-family: "Roboto";
-}
+@mixin default {
+  .main {
+    background-color: $blue;
+    font-family: "Roboto";
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
 
-.loginBox {
-  width: 45vh;
-  height: 70vh;
-  background-color: $light-blue;
-  //   box-shadow: inset 0.2vh 0.3vh 1.2vh rgba(black, 0.4);
-  border-top-right-radius: 2vh;
-  border-top-left-radius: 2vh;
-  border-bottom-left-radius: 10vh;
-  border-bottom-right-radius: 10vh;
-  padding-top: 2vh;
-  margin-bottom: 15vh;
-  margin-right: 20vh;
-}
-.buttonDiv {
-  padding-left: 3.7vh;
-  padding-right: 3.7vh;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 70%;
-  height: 5.8vh;
-  background-color: $blue;
-  border-radius: 1vh;
-  letter-spacing: 0.12vh;
-  font-size: 2.1vh;
-  box-shadow: 0.4vh 0.6vh 0.75vh rgba(black, 0.3);
-}
-
-.inputDiv {
-  padding-left: 3vh;
-  padding-right: 3vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 70%;
-  height: 5.8vh;
-  background-color: $light-blue;
-  border-radius: 1vh;
-  letter-spacing: 0.12vh;
-  font-size: 2.1vh;
-  box-shadow: inset 0.2vh 0.2vh 0.5vh rgba(black, 0.3);
-  input {
+  .loginBox {
+    width: 45vh;
+    height: 70vh;
     background-color: $light-blue;
+    border-top-right-radius: 2vh;
+    border-top-left-radius: 2vh;
+    border-bottom-left-radius: 2vh;
+    border-bottom-right-radius: 2vh;
+    padding-top: 2vh;
+    margin-bottom: 15vh;
+  }
+  .buttonDiv {
+    padding-left: 3.7vh;
+    padding-right: 3.7vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 70%;
+    height: 5.8vh;
+    background-color: $blue;
+    border-radius: 1vh;
+    letter-spacing: 0.12vh;
+    font-size: 2.1vh;
+    box-shadow: 0.4vh 0.6vh 0.75vh rgba(black, 0.3);
+  }
+
+  .inputDiv {
+    padding-left: 3vh;
+    padding-right: 3vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    height: 5.8vh;
+    background-color: $light-blue;
+    border-radius: 1vh;
+    letter-spacing: 0.12vh;
+    font-size: 2.1vh;
+    box-shadow: inset 0.2vh 0.2vh 0.5vh rgba(black, 0.3);
+    input {
+      background-color: $light-blue;
+      text-align: center;
+    }
+    input:focus {
+      outline: none;
+    }
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+      transition: background-color $light-blue ease-in-out 0s;
+    }
+  }
+  .errorMsg {
+    font-size: 1.5vh;
+    color: $red;
+  }
+  .promptDiv {
+    padding-left: 2vh;
+    padding-right: 2vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-align: center;
-  }
-  input:focus {
-    outline: none;
-  }
-  input:-webkit-autofill,
-  input:-webkit-autofill:hover,
-  input:-webkit-autofill:focus,
-  input:-webkit-autofill:active {
-    transition: background-color $light-blue ease-in-out 0s;
-  }
-}
-.errorMsg {
-  font-size: 1.5vh;
-  color: $red;
-}
-.promptDiv {
-  padding-left: 2vh;
-  padding-right: 2vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  width: 70%;
-  height: 1vh;
-  letter-spacing: 0.05vh;
-  font-size: 1.8vh;
-  color: rgba(black, 0.4);
-  margin-top: 1vh;
-}
-
-.icon {
-  height: 4vh;
-}
-.text {
-  color: $light-blue;
-  text-shadow: 0.4vh 0.6vh 1.5vh rgba(black, 0.4);
-  user-select: none;
-}
-
-.line {
-  width: 70%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  div {
-    border: 1px solid rgba(black, 0.2);
-    width: 42%;
-  }
-  p {
-    font-size: 1.7vh;
+    width: 70%;
+    height: 1vh;
+    letter-spacing: 0.05vh;
+    font-size: 1.8vh;
     color: rgba(black, 0.4);
+    margin-top: 1vh;
   }
-  button {
-    font-size: 1.7vh;
-    color: rgba(black, 0.4);
+
+  .icon {
+    height: 4vh;
+  }
+  .text {
+    color: $light-blue;
+    text-shadow: 0.4vh 0.6vh 1.5vh rgba(black, 0.4);
+    user-select: none;
+  }
+
+  .line {
+    width: 70%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    div {
+      border: 1px solid rgba(black, 0.2);
+      width: 42%;
+    }
+    p {
+      font-size: 1.7vh;
+      color: rgba(black, 0.4);
+    }
+    button {
+      font-size: 1.7vh;
+      color: rgba(black, 0.4);
+    }
+  }
+
+  .errorMsgDiv {
+    width: 45vh;
+    height: 4vh;
+    border-top-right-radius: 2vh;
+    border-top-left-radius: 2vh;
+    border-bottom-left-radius: 1vh;
+    border-bottom-right-radius: 1vh;
+    background-color: $red;
+    color: $light-blue;
+    box-shadow: inset 0.1vh 0.2vh 1vh rgba(black, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
 
-.errorMsgDiv {
-  width: 45vh;
-  height: 4vh;
-  border-top-right-radius: 2vh;
-  border-top-left-radius: 2vh;
-  border-bottom-left-radius: 1vh;
-  border-bottom-right-radius: 1vh;
-  background-color: $red;
-  color: $light-blue;
-  box-shadow: inset 0.1vh 0.2vh 1vh rgba(black, 0.3);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+//! desktop
+@include media(">=tablet") {
+  @include default();
+  .main {
+    justify-content: flex-start;
+    padding-left: 10%;
+  }
+}
+
+//! mobile
+@include media("<=tablet") {
+  @include default();
+  .main {
+    justify-content: center;
+  }
 }

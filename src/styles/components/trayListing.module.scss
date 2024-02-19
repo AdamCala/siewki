@@ -5,15 +5,17 @@
   background-color: $light-blue;
   width: 70vh;
   height: 13vh;
-  display: flex;
-  justify-content: flex-end;
-  align-items: end;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 2fr;
 }
 
-.icon {
-  margin-right: 4vh;
-  margin-bottom: 2vh;
-  position: relative;
+.icon_add {
+  height: 10vh;
+  width: 10vh;
+  color: $blue;
+}
+.icon_tray {
   height: 6vh;
   color: $blue;
 }

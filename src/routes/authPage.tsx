@@ -139,7 +139,8 @@ const AuthPage = () => {
         const errorCode = error.code;
         setErrorMessage(errorCode);
       }
-    } else {
+    }
+    if (authType === "login") {
       try {
         // Attempt to sign in with Firebase authentication
         const { user } = await signInWithEmailAndPassword(
@@ -180,7 +181,7 @@ const AuthPage = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<AuthForm>({
-    resolver: yupResolver(authFormSchema),
+    resolver: yupResolver(authFormSchema(authType)),
   });
 
   /**
@@ -190,14 +191,15 @@ const AuthPage = () => {
     setAuthType((prevAuthType) =>
       prevAuthType === "login" ? "sign-up" : "login"
     );
+    console.log(authType);
   };
 
   return (
     <>
       {/* Desktop background SVG */}
-      <DesktopBackground
+      {/* <DesktopBackground
         className={`${styles.background_svg} absolute bottom-0 z-10 pointer-events-none`}
-      />
+      /> */}
 
       {/* ResetPassword component */}
       <ResetPassword
@@ -211,9 +213,7 @@ const AuthPage = () => {
       />
 
       {/* Main content of the authentication page */}
-      <div
-        className={`${styles.main} w-screen h-screen flex justify-evenly items-center flex-row`}
-      >
+      <div className={styles.main}>
         {/* Authentication form */}
         <form onSubmit={handleSubmit(handleFormSubmit)}>
           {errorMessage && (
@@ -334,11 +334,6 @@ const AuthPage = () => {
             </div>
           </div>
         </form>
-
-        {/* Empty divs for spacing */}
-        <div className={`${styles.div}`}></div>
-        <div></div>
-        <div></div>
       </div>
     </>
   );
