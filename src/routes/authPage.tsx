@@ -139,7 +139,8 @@ const AuthPage = () => {
         const errorCode = error.code;
         setErrorMessage(errorCode);
       }
-    } else {
+    }
+    if (authType === "login") {
       try {
         // Attempt to sign in with Firebase authentication
         const { user } = await signInWithEmailAndPassword(
@@ -180,7 +181,7 @@ const AuthPage = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<AuthForm>({
-    resolver: yupResolver(authFormSchema),
+    resolver: yupResolver(authFormSchema(authType)),
   });
 
   /**
@@ -190,6 +191,7 @@ const AuthPage = () => {
     setAuthType((prevAuthType) =>
       prevAuthType === "login" ? "sign-up" : "login"
     );
+    console.log(authType);
   };
 
   return (
