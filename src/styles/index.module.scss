@@ -34,6 +34,7 @@
     transform: translate(-50%, -66.666%) scale(1.05);
   }
 }
+
 //! desktop
 @include media(">=tablet") {
   @include default();

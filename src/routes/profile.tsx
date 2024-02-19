@@ -10,7 +10,6 @@ import { sendPasswordResetEmail, signOut } from "firebase/auth";
 import { auth } from "../config/firebase";
 import { logout } from "../features/authSlice";
 import SettingsPage from "../components/settingsPage";
-import TrayListing from "../components/assets/trayListing";
 
 /**
  * Component representing the user profile page.
@@ -80,44 +79,43 @@ const Profile = () => {
         onClose={() => setOpenSettings(false)}
       />
       <div className={`${styles.main} w-screen h-screen`}>
-        {/* User avatar or initial letter */}
-        <div
-          className={`${styles.circle} rounded-full flex justify-center items-center`}
-        >
-          {user?.photoUrl ? (
-            <img
-              className="w-4/5 rounded-full"
-              src={user.photoUrl}
-              alt="avatar"
-            />
-          ) : (
-            <div className="w-4/5 h-4/5 rounded-full">
-              {user?.email[0].toUpperCase()}
-            </div>
-          )}
-        </div>
+        <div className={styles.circle_container}>
+          {/* User avatar or initial letter */}
+          <div
+            className={`${styles.circle} rounded-full flex justify-center items-center`}
+          >
+            {user?.photoUrl ? (
+              <img
+                className="w-4/5 rounded-full"
+                src={user.photoUrl}
+                alt="avatar"
+              />
+            ) : (
+              <div className="w-4/5 h-4/5 rounded-full">
+                {user?.email[0].toUpperCase()}
+              </div>
+            )}
+          </div>
 
-        {/* Logout button */}
-        <div
-          onClick={handleLogout}
-          className={`${styles.circle_md} rounded-full cursor-pointer`}
-        >
-          <Logout className={`${styles.icon}`} />
-        </div>
+          {/* Logout button */}
+          <div
+            onClick={handleLogout}
+            className={`${styles.circle_md} rounded-full cursor-pointer`}
+          >
+            <Logout className={`${styles.icon}`} />
+          </div>
 
-        {/* Settings button */}
-        <div
-          onClick={() => setOpenSettings(true)}
-          className={`${styles.circle_sm} rounded-full cursor-pointer`}
-        >
-          <Settings className={`${styles.icon}`} />
+          {/* Settings button */}
+          <div
+            onClick={() => setOpenSettings(true)}
+            className={`${styles.circle_sm} rounded-full cursor-pointer`}
+          >
+            <Settings className={`${styles.icon}`} />
+          </div>
         </div>
 
         {/* Container for tray listings */}
-        <div className={`${styles.tray_container}`}>
-          <TrayListing areSettingsOpen={openSettings} />
-          {/* Additional TrayListing components */}
-        </div>
+        <div className={`${styles.tray_container}`}></div>
 
         {/* Div for blurring the background */}
         <div className={`${styles.bluring_div}`} />
