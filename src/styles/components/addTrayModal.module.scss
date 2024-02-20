@@ -1,0 +1,10 @@
+@import "../../styles/breakpoints.scss";
+@import "../../styles/vars.scss";
+
+.main {
+  width: 100%;
+  height: 100vh;
+}
+.modal {
+  background-color: $light-blue;
+}

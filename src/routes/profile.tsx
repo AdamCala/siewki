@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Logout from "../components/icons/logout";
@@ -9,9 +9,10 @@ import styles from "../styles/profile/index.module.scss";
 import { sendPasswordResetEmail, signOut } from "firebase/auth";
 import { auth } from "../config/firebase";
 import { logout } from "../features/authSlice";
-import SettingsPage from "../components/settingsPage";
+import SettingsModal from "../components/settingsModal";
 import TraySelect from "../components/traySelect";
 import TraySettings from "../components/traySettings";
+import AddTrayModal from "../components/addTrayModal";
 
 /**
  * Component representing the user profile page.
@@ -21,6 +22,7 @@ import TraySettings from "../components/traySettings";
 const Profile = () => {
   const { user } = useAppSelector((state) => state.auth);
   const [openSettings, setOpenSettings] = useState(false);
+  const [openAddModal, setOpenAddModal] = useState(false);
 
   const [resetPasswordEmail, setResetPasswordEmail] = useState("");
   const [resetPasswordSuccess, setResetPasswordSuccess] = useState<
@@ -70,7 +72,7 @@ const Profile = () => {
   return (
     <>
       {/* SettingsPage component for handling user settings */}
-      <SettingsPage
+      <SettingsModal
         setResetPasswordEmail={setResetPasswordEmail}
         resetPasswordSuccess={resetPasswordSuccess}
         resetPasswordError={resetPasswordError}
@@ -79,6 +81,10 @@ const Profile = () => {
         user={user}
         isOpen={openSettings}
         onClose={() => setOpenSettings(false)}
+      />
+      <AddTrayModal
+        isOpen={openAddModal}
+        onClose={() => setOpenAddModal(false)}
       />
       <div className={`${styles.main} w-screen h-screen`}>
         <div className={styles.circle_container}>
@@ -117,7 +123,7 @@ const Profile = () => {
         </div>
         {/* Container for tray settings */}
         <div className={`${styles.tray_settings}`}>
-          <TraySettings></TraySettings>
+          <TraySettings setOpenAddModal={setOpenAddModal}></TraySettings>
         </div>
         {/* Container for tray listings */}
         <div className={`${styles.tray_container}`}>

@@ -20,7 +20,7 @@ import { setDoc, doc } from "firebase/firestore";
 import { sendPasswordResetEmail } from "firebase/auth";
 import { auth, db } from "../config/firebase";
 import { yupResolver } from "@hookform/resolvers/yup";
-import ResetPassword from "../components/resetPassword";
+import ResetPasswordModal from "../components/resetPasswordModal";
 import DesktopBackground from "../components/assets/desktopBackground";
 
 /**
@@ -202,7 +202,7 @@ const AuthPage = () => {
       /> */}
 
       {/* ResetPassword component */}
-      <ResetPassword
+      <ResetPasswordModal
         resetPasswordEmail={resetPasswordEmail}
         resetPasswordSuccess={resetPasswordSuccess}
         resetPasswordError={resetPasswordError}

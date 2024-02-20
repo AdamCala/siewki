@@ -40,7 +40,7 @@ interface settingsProps {
  *   @param {React.Dispatch<React.SetStateAction<string>>} setResetPasswordEmail - State setter for the reset password email.
  * @returns {JSX.Element} - JSX element representing the SettingsPage component.
  */
-const settingsPage: FC<settingsProps> = (props) => {
+const settingsModal: FC<settingsProps> = (props) => {
   const {
     isOpen,
     onClose,
@@ -124,4 +124,4 @@ const settingsPage: FC<settingsProps> = (props) => {
   );
 };
 
-export default settingsPage;
+export default settingsModal;
