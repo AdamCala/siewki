@@ -21,6 +21,8 @@
     display: grid;
     grid-template-columns: 2;
     grid-template-rows: 2;
+    gap: 2vh;
+    margin-right: 5vh;
   }
 
   .circle {
@@ -73,45 +75,23 @@
   .circle_sm:hover {
     transform: scale(1.05);
   }
-
-  .tray_container {
-    position: absolute;
-    top: 7vh;
-    padding-top: 1vh;
-    height: calc(100vh - 7vh);
-    right: 0;
-    overflow-y: auto;
-    div {
-      margin-bottom: 5vh;
-    }
-  }
-  .tray_container::-webkit-scrollbar {
-    width: 1vh;
-  }
-  .tray_container::-webkit-scrollbar-track {
-    background-color: $blue;
-  }
-  .tray_container::-webkit-scrollbar-thumb {
-    border-radius: 0.5vh;
-    background-color: rgba($light-navy, 0.75);
-  }
-
-  .bluring_div {
-    position: absolute;
-    bottom: 0;
-    right: 1vh;
-    width: 70vh;
-    height: 7vh;
-    backdrop-filter: blur(0.1vh);
-  }
 }
 
 //! desktop
 @include media(">=tablet") {
   @include default();
 
+  .main {
+    display: grid;
+    grid-template-columns: auto 1fr;
+  }
+
   .circle_container {
     padding: 5vh;
+    grid-column: 1;
+  }
+  .tray_container {
+    grid-column: 2;
   }
 }
 
@@ -120,12 +100,17 @@
   @include default();
 
   .main {
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-rows: auto 1fr;
   }
 
   .circle_container {
     padding: 5vh;
+    grid-row: 1;
+    place-self: center;
+  }
+  .tray_container {
+    grid-row: 2;
   }
 
   .circle {

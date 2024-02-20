@@ -1,0 +1,30 @@
+@import "../../styles/breakpoints.scss";
+@import "../../styles/vars.scss";
+
+@mixin default {
+  .main {
+    background-color: $light-blue;
+    border-radius: 1.5vh;
+    place-self: center;
+  }
+}
+
+//! desktop
+@include media(">=tablet") {
+  @include default();
+
+  .main {
+    width: 15vh;
+    height: 15vh;
+  }
+}
+
+//! nobile
+@include media("<=tablet") {
+  @include default();
+
+  .main {
+    width: 12vh;
+    height: 12vh;
+  }
+}

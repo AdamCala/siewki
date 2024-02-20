@@ -10,6 +10,7 @@ import { sendPasswordResetEmail, signOut } from "firebase/auth";
 import { auth } from "../config/firebase";
 import { logout } from "../features/authSlice";
 import SettingsPage from "../components/settingsPage";
+import TraySelect from "../components/traySelect";
 
 /**
  * Component representing the user profile page.
@@ -115,10 +116,9 @@ const Profile = () => {
         </div>
 
         {/* Container for tray listings */}
-        <div className={`${styles.tray_container}`}></div>
-
-        {/* Div for blurring the background */}
-        <div className={`${styles.bluring_div}`} />
+        <div className={`${styles.tray_container}`}>
+          <TraySelect></TraySelect>
+        </div>
       </div>
     </>
   );
