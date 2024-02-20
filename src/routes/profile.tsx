@@ -11,6 +11,7 @@ import { auth } from "../config/firebase";
 import { logout } from "../features/authSlice";
 import SettingsPage from "../components/settingsPage";
 import TraySelect from "../components/traySelect";
+import TraySettings from "../components/traySettings";
 
 /**
  * Component representing the user profile page.
@@ -114,7 +115,10 @@ const Profile = () => {
             <Settings className={`${styles.icon}`} />
           </div>
         </div>
-
+        {/* Container for tray settings */}
+        <div className={`${styles.tray_settings}`}>
+          <TraySettings></TraySettings>
+        </div>
         {/* Container for tray listings */}
         <div className={`${styles.tray_container}`}>
           <TraySelect></TraySelect>
