@@ -1,10 +1,15 @@
 import styles from "../../styles/components/utils/button.module.scss";
 
-const Button = ({ className, ...props }: any) => {
+const Button = ({ className, text, icon, type, ...props }: any) => {
   return (
-    <div className={`${styles.buttonDiv} ${className}`}>
-      <button {...props}></button>
-    </div>
+    <button
+      {...props}
+      className={`${styles.buttonDiv} ${className}`}
+      type={type}
+    >
+      {icon}
+      {text}
+    </button>
   );
 };
 

@@ -1,5 +1,5 @@
 import { FC, SetStateAction } from "react";
-import styles from "../styles/components/resetPassword.module.scss";
+import styles from "../styles/components/resetPasswordModal.module.scss";
 import Logo from "./icons/logo";
 import InputText from "./utils/inputText";
 import Button from "./utils/button";
@@ -75,9 +75,11 @@ const resetPassword: FC<resetPasswordProps> = (props) => {
         />
 
         {/* Button to trigger password reset */}
-        <Button onClick={handlePasswordReset} className={`${styles.text}`}>
-          Reset Password
-        </Button>
+        <Button
+          onClick={handlePasswordReset}
+          className={`${styles.text}`}
+          text="Reset Password"
+        />
 
         {/* Display success message if any */}
         {resetPasswordSuccess && (

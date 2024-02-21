@@ -5,6 +5,7 @@
   padding-left: 3.7vh;
   padding-right: 3.7vh;
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   width: 70%;
@@ -16,4 +17,9 @@
   box-shadow: 0.4vh 0.6vh 0.75vh rgba(black, 0.3);
   margin-top: 2vh;
   cursor: pointer;
+  font-size: 2vh;
+  font-weight: bold;
+  font-family: "Roboto";
+  place-self: center;
+  color: $light-navy;
 }

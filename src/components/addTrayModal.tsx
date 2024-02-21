@@ -1,5 +1,6 @@
 import { FC } from "react";
 import styles from "../styles/components/addTrayModal.module.scss";
+import Button from "./utils/button";
 
 interface addTrayModalProps {
   isOpen: boolean;
@@ -30,9 +31,7 @@ const addTrayModal: FC<addTrayModalProps> = (props) => {
       >
         <div className={styles.main}>
           <div className={styles.modal}>
-            <div onClick={onClose}>
-              <p className={`my-5`}>Close</p>
-            </div>
+            <Button onClick={onClose} text="CLOSE" />
           </div>
         </div>
       </div>

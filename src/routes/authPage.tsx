@@ -22,6 +22,7 @@ import { auth, db } from "../config/firebase";
 import { yupResolver } from "@hookform/resolvers/yup";
 import ResetPasswordModal from "../components/resetPasswordModal";
 import InputText from "../components/utils/inputText";
+import Button from "../components/utils/button";
 
 /**
  * Component representing the authentication page.
@@ -226,13 +227,12 @@ const AuthPage = () => {
             className={`${styles.loginBox} flex flex-col items-center justify-evenly`}
           >
             {/* Google sign-in button */}
-            <div
+            <Button
               onClick={signInWithGoogle}
               className={`${styles.buttonDiv} hover:cursor-pointer`}
-            >
-              <Google className={`${styles.icon} `} />
-              <p className={`${styles.text} `}>Login with Google</p>
-            </div>
+              icon={<Google className={`${styles.icon} `} />}
+              text="Login with Google"
+            />
 
             {/* Or separator */}
             <div className={`${styles.line} `}>
@@ -289,7 +289,17 @@ const AuthPage = () => {
             )}
 
             {/* Submit button */}
-            <button
+
+            <Button
+              disabled={loading}
+              type="submit"
+              className={styles.buttonDiv}
+              icon={<Mail className={`${styles.icon}`} />}
+              text={
+                authType === "login" ? "Login with email" : "Sign up with email"
+              }
+            />
+            {/* <button
               disabled={loading}
               type="submit"
               className={`${styles.buttonDiv} `}
@@ -298,7 +308,7 @@ const AuthPage = () => {
               <p className={`${styles.text} `}>
                 {authType === "login" ? "Login" : "Sign up"} with email
               </p>
-            </button>
+            </button> */}
 
             {/* Prompt to switch between login and sign-up forms */}
             {authType === "login" ? (
