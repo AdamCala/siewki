@@ -21,7 +21,7 @@ import { sendPasswordResetEmail } from "firebase/auth";
 import { auth, db } from "../config/firebase";
 import { yupResolver } from "@hookform/resolvers/yup";
 import ResetPasswordModal from "../components/resetPasswordModal";
-import DesktopBackground from "../components/assets/desktopBackground";
+import InputText from "../components/utils/inputText";
 
 /**
  * Component representing the authentication page.
@@ -141,6 +141,7 @@ const AuthPage = () => {
       }
     }
     if (authType === "login") {
+      console.log(user);
       try {
         // Attempt to sign in with Firebase authentication
         const { user } = await signInWithEmailAndPassword(
@@ -241,14 +242,12 @@ const AuthPage = () => {
             </div>
 
             {/* Email input */}
-            <div className={`${styles.inputDiv} `}>
-              <input
-                type="text"
-                id="email"
-                placeholder="example@email.com"
-                {...register("email")}
-              />
-            </div>
+            <InputText
+              type="text"
+              id="email"
+              placeholder="example@email.com"
+              {...register("email")}
+            />
             {errors.email ? (
               <span className={`${styles.errorMsg} `}>
                 {errors.email.message}
@@ -258,14 +257,12 @@ const AuthPage = () => {
             )}
 
             {/* Password input */}
-            <div className={`${styles.inputDiv} `}>
-              <input
-                type="password"
-                id="passwd"
-                placeholder="* * * * * * * *"
-                {...register("password")}
-              />
-            </div>
+            <InputText
+              type="password"
+              id="passwd"
+              placeholder="* * * * * * * *"
+              {...register("password")}
+            />
             {errors.password ? (
               <span className={`${styles.errorMsg} `}>
                 {errors.password.message}
@@ -276,14 +273,12 @@ const AuthPage = () => {
 
             {/* Confirm Password input for sign-up */}
             {authType === "sign-up" && (
-              <div className={`${styles.inputDiv} `}>
-                <input
-                  type="password"
-                  id="confpasswd"
-                  placeholder="confirm password"
-                  {...register("confirmPassword")}
-                />
-              </div>
+              <InputText
+                type="password"
+                id="confpasswd"
+                placeholder="confirm password"
+                {...register("confirmPassword")}
+              />
             )}
             {errors.confirmPassword ? (
               <span className={`${styles.errorMsg} `}>

@@ -1,4 +1,4 @@
-import { SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Logout from "../components/icons/logout";
@@ -23,7 +23,6 @@ const Profile = () => {
   const { user } = useAppSelector((state) => state.auth);
   const [openSettings, setOpenSettings] = useState(false);
   const [openAddModal, setOpenAddModal] = useState(false);
-
   const [resetPasswordEmail, setResetPasswordEmail] = useState("");
   const [resetPasswordSuccess, setResetPasswordSuccess] = useState<
     string | null

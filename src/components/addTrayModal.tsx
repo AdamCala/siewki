@@ -16,6 +16,12 @@ interface addTrayModalProps {
 
 const addTrayModal: FC<addTrayModalProps> = (props) => {
   const { isOpen, onClose } = props;
+  //   + add
+  //   + remove
+  //   + name
+  //   + cols
+  //   + rows
+  //   + desc
   return (
     <>
       <div

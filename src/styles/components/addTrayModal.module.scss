@@ -4,7 +4,14 @@
 .main {
   width: 100%;
   height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Roboto";
 }
 .modal {
+  width: 135vh;
+  height: 70vh;
+  border-radius: 2vh;
   background-color: $light-blue;
 }

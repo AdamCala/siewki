@@ -1,6 +1,7 @@
-import { FC } from "react";
-import styles from "../styles/components/settingsPage.module.scss";
+import { FC, SetStateAction } from "react";
+import styles from "../styles/components/settingsModal.module.scss";
 import { User } from "../models/User";
+import InputText from "./utils/inputText";
 
 /**
  * Interface representing props for settings modal
@@ -85,17 +86,16 @@ const settingsModal: FC<settingsProps> = (props) => {
         </div>
 
         {/* Input field for entering email */}
-        <div className={`${styles.inputDiv}`}>
-          <input
-            type="email"
-            value={resetPasswordEmail}
-            onChange={(e) => {
-              setResetPasswordEmail(e.target.value);
-            }}
-            placeholder="your@email.com"
-            id="email"
-          />
-        </div>
+        <InputText
+          className={styles.inputDivWidth}
+          type="email"
+          value={resetPasswordEmail}
+          onChange={(e: { target: { value: SetStateAction<string> } }) => {
+            setResetPasswordEmail(e.target.value);
+          }}
+          placeholder="your@email.com"
+          id="email"
+        />
 
         {/* Button to trigger password reset */}
         <div

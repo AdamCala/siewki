@@ -37,34 +37,6 @@
     box-shadow: 0.4vh 0.6vh 0.75vh rgba(black, 0.3);
   }
 
-  .inputDiv {
-    padding-left: 3vh;
-    padding-right: 3vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 70%;
-    height: 5.8vh;
-    background-color: $light-blue;
-    border-radius: 1vh;
-    letter-spacing: 0.12vh;
-    font-size: 2.1vh;
-    box-shadow: inset 0.2vh 0.2vh 0.5vh rgba(black, 0.3);
-    input {
-      background-color: $light-blue;
-      text-align: center;
-    }
-    input:focus {
-      outline: none;
-    }
-    input:-webkit-autofill,
-    input:-webkit-autofill:hover,
-    input:-webkit-autofill:focus,
-    input:-webkit-autofill:active {
-      transition: background-color $light-blue ease-in-out 0s;
-    }
-  }
   .errorMsg {
     font-size: 1.5vh;
     color: $red;
