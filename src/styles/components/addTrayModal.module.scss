@@ -11,28 +11,19 @@
     font-family: "Roboto";
   }
   .modal {
-    width: 70vh;
-    height: 54vh;
     border-radius: 2vh;
     background-color: $light-blue;
     box-shadow: 0.4vh 0.6vh 0.75vh rgba(black, 0.3);
     display: grid;
-    grid-template-columns: 35vh 35vh;
-    grid-template-rows: 27vh 27vh;
     border: 0.1vh solid $navy;
   }
-  .button {
-    width: 25vh;
-  }
+
   .icon {
     height: 8vh;
     height: 8vh;
     color: $light-navy;
     padding-right: 0.7vh;
     padding-top: 0.7vh;
-  }
-  .inputText {
-    width: 30vh;
   }
 
   .finalize {
@@ -59,7 +50,6 @@
   }
   .row1 {
     grid-column: 1 / span 2 !important;
-    width: 38vh;
     justify-self: center;
   }
   .inputText {
@@ -89,9 +79,54 @@
 //! desktop
 @include media(">=tablet") {
   @include default();
+  .modal {
+    width: 60vh;
+    height: 54vh;
+    grid-template-columns: 30vh 30vh;
+    grid-template-rows: 27vh 27vh;
+  }
+  .inputText {
+    width: 30vh;
+  }
+  .button {
+    width: 25vh;
+  }
+  .row1 {
+    width: 38vh;
+  }
 }
 
 //! mobile
 @include media("<=tablet") {
   @include default();
+  .finalize {
+    grid-column: 1 / span 2;
+    grid-row: 2;
+    display: flex;
+    align-items: row;
+    flex-direction: row;
+    justify-content: center;
+    gap: 2vh;
+    padding-bottom: 5vh;
+  }
+  .modal {
+    width: 36vh;
+    height: 54vh;
+    grid-template-columns: 18vh 18vh;
+    grid-template-rows: 27vh 27vh;
+  }
+
+  .inputText {
+    width: 18vh;
+    input {
+      width: 17vh;
+    }
+  }
+  .button {
+    width: 14vh;
+    font-size: smaller;
+  }
+  .row1 {
+    width: 26vh;
+  }
 }

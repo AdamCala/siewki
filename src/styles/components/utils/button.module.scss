@@ -22,4 +22,8 @@
   font-family: "Roboto";
   place-self: center;
   color: $light-navy;
+  transition: transform 0.3s ease-in-out;
+}
+.buttonDiv:hover {
+  transform: scale(1.02);
 }
