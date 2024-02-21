@@ -289,7 +289,6 @@ const AuthPage = () => {
             )}
 
             {/* Submit button */}
-
             <Button
               disabled={loading}
               type="submit"
@@ -299,16 +298,6 @@ const AuthPage = () => {
                 authType === "login" ? "Login with email" : "Sign up with email"
               }
             />
-            {/* <button
-              disabled={loading}
-              type="submit"
-              className={`${styles.buttonDiv} `}
-            >
-              <Mail className={`${styles.icon} text-black/40`} />
-              <p className={`${styles.text} `}>
-                {authType === "login" ? "Login" : "Sign up"} with email
-              </p>
-            </button> */}
 
             {/* Prompt to switch between login and sign-up forms */}
             {authType === "login" ? (

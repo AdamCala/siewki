@@ -2,6 +2,7 @@ import { FC, SetStateAction } from "react";
 import styles from "../styles/components/settingsModal.module.scss";
 import { User } from "../models/User";
 import InputText from "./utils/inputText";
+import Button from "./utils/button";
 
 /**
  * Interface representing props for settings modal
@@ -98,12 +99,11 @@ const settingsModal: FC<settingsProps> = (props) => {
         />
 
         {/* Button to trigger password reset */}
-        <div
+        <Button
           onClick={handlePasswordReset}
-          className={`${styles.buttonDiv} cursor-pointer`}
-        >
-          <p className={`my-5`}>Change Password</p>
-        </div>
+          className={styles.buttonDiv}
+          text="Change Password"
+        />
 
         {/* Display success message if any */}
         {resetPasswordSuccess && (
@@ -116,9 +116,7 @@ const settingsModal: FC<settingsProps> = (props) => {
         )}
 
         {/* Button to close the modal */}
-        <div onClick={onClose} className={`${styles.buttonDiv} cursor-pointer`}>
-          <p className={`my-5`}>Close</p>
-        </div>
+        <Button onClick={onClose} className={styles.buttonDiv} text="Close" />
       </div>
     </div>
   );

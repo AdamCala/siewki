@@ -20,6 +20,7 @@
     font-family: "Roboto";
     color: $light-navy;
     box-shadow: 0.4vh 0.6vh 0.75vh rgba(black, 0.3);
+    border: 0.1vh solid $navy;
   }
 
   .outer_circle {
@@ -56,23 +57,6 @@
     }
   }
 
-  .buttonDiv {
-    margin-bottom: 3vh;
-    padding-left: 3.7vh;
-    padding-right: 3.7vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    width: 30vh;
-    height: 5.8vh;
-    background-color: $blue;
-    border-radius: 1vh;
-    letter-spacing: 0.05vh;
-    line-height: 2.6vh;
-    font-size: 2vh;
-    box-shadow: 0.4vh 0.6vh 0.75vh rgba(black, 0.3);
-  }
   .success {
     padding-bottom: 2vh;
     font-size: 1.6vh;
@@ -87,7 +71,10 @@
   //> overwrite the inpoutText styles
   .inputDivWidth {
     width: 30vh !important;
-    margin-bottom: 3vh;
+  }
+  .buttonDiv {
+    width: 30vh !important;
+    margin-top: 3vh;
   }
 }
 

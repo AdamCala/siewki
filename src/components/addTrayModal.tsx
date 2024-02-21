@@ -1,6 +1,10 @@
 import { FC } from "react";
 import styles from "../styles/components/addTrayModal.module.scss";
 import Button from "./utils/button";
+import InputText from "./utils/inputText";
+import AddCols from "./icons/addCols";
+import AddRows from "./icons/addRows";
+import SeedlingTray from "./icons/seedlingTray";
 
 interface addTrayModalProps {
   isOpen: boolean;
@@ -18,7 +22,7 @@ interface addTrayModalProps {
 const addTrayModal: FC<addTrayModalProps> = (props) => {
   const { isOpen, onClose } = props;
   //   + add
-  //   + remove
+  //   + cancel
   //   + name
   //   + cols
   //   + rows
@@ -31,7 +35,34 @@ const addTrayModal: FC<addTrayModalProps> = (props) => {
       >
         <div className={styles.main}>
           <div className={styles.modal}>
-            <Button onClick={onClose} text="CLOSE" />
+            <div className={styles.modify}>
+              <InputText
+                className={`${styles.inputText} ${styles.row1}`}
+                type="text"
+                placeholder="tray name"
+              />
+              <AddCols className={`${styles.icon} ${styles.row2}`} />
+              <InputText
+                className={`${styles.inputText} ${styles.row2}`}
+                type="number"
+                placeholder="columns"
+              />
+              <AddRows className={`${styles.icon} ${styles.row3}`} />
+              <InputText
+                className={`${styles.inputText} ${styles.row3}`}
+                type="number"
+                placeholder="rows"
+              />
+            </div>
+            <SeedlingTray className={styles.trayIcon} />
+            <div className={styles.finalize}>
+              <Button className={styles.button} text="ADD TRAY" />
+              <Button
+                className={styles.button}
+                onClick={onClose}
+                text="CANCEL"
+              />
+            </div>
           </div>
         </div>
       </div>

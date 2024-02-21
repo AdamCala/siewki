@@ -28,4 +28,10 @@
   input:-webkit-autofill:active {
     transition: background-color $light-blue ease-in-out 0s;
   }
+  input::placeholder {
+    letter-spacing: 0.1vh;
+  }
+  ::-ms-input-placeholder {
+    letter-spacing: 0.1vh;
+  }
 }

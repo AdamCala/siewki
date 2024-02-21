@@ -1,18 +1,97 @@
 @import "../../styles/breakpoints.scss";
 @import "../../styles/vars.scss";
 
-.main {
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: "Roboto";
+@mixin default {
+  .main {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Roboto";
+  }
+  .modal {
+    width: 70vh;
+    height: 54vh;
+    border-radius: 2vh;
+    background-color: $light-blue;
+    box-shadow: 0.4vh 0.6vh 0.75vh rgba(black, 0.3);
+    display: grid;
+    grid-template-columns: 35vh 35vh;
+    grid-template-rows: 27vh 27vh;
+    border: 0.1vh solid $navy;
+  }
+  .button {
+    width: 25vh;
+  }
+  .icon {
+    height: 8vh;
+    height: 8vh;
+    color: $light-navy;
+    padding-right: 0.7vh;
+    padding-top: 0.7vh;
+  }
+  .inputText {
+    width: 30vh;
+  }
+
+  .finalize {
+    grid-column: 2;
+    grid-row: 2;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding-bottom: 5vh;
+  }
+  .modify {
+    grid-column: 1 / span 2;
+    width: 100%;
+    height: 100%;
+    grid-row: 1;
+    display: grid;
+    grid-template-columns: 6vh auto;
+    grid-template-rows: 6vh 6vh 6vh;
+    padding-top: 10vh;
+    justify-content: center;
+    align-content: center;
+    gap: 2vh;
+  }
+  .row1 {
+    grid-column: 1 / span 2 !important;
+    width: 38vh;
+    justify-self: center;
+  }
+  .inputText {
+    grid-column: 2;
+  }
+
+  .icon {
+    grid-column: 1;
+  }
+  .modify > *:nth-child(odd) {
+    justify-self: start;
+  }
+  .modify > *:nth-child(even) {
+    justify-self: end;
+  }
+  .trayIcon {
+    grid-column: 1;
+    grid-row: 2;
+    width: 27vh;
+    align-self: self-end;
+    padding-bottom: 1vh;
+    padding-left: 1vh;
+    color: $blue;
+  }
 }
-.modal {
-  width: 135vh;
-  height: 70vh;
-  border-radius: 2vh;
-  background-color: $light-blue;
-  box-shadow: 0.4vh 0.6vh 0.75vh rgba(black, 0.3);
+
+//! desktop
+@include media(">=tablet") {
+  @include default();
+}
+
+//! mobile
+@include media("<=tablet") {
+  @include default();
 }

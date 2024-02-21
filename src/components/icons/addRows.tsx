@@ -3,6 +3,7 @@ const addRows = (props: any) => (
     xmlns="http://www.w3.org/2000/svg"
     data-name="insert columns"
     viewBox="0 0 24 30"
+    fill="currentColor"
     {...props}
   >
     <defs>
