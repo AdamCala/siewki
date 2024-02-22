@@ -10,6 +10,9 @@
     align-items: center;
     font-family: "Roboto";
   }
+  .hidden {
+    display: none;
+  }
   .modal {
     border-radius: 2vh;
     background-color: $light-blue;
@@ -41,12 +44,10 @@
     height: 100%;
     grid-row: 1;
     display: grid;
-    grid-template-columns: 6vh auto;
-    grid-template-rows: 6vh 6vh 6vh;
     padding-top: 10vh;
     justify-content: center;
     align-content: center;
-    gap: 2vh;
+    gap: 1vh;
   }
   .row1 {
     grid-column: 1 / span 2 !important;
@@ -74,11 +75,31 @@
     padding-left: 1vh;
     color: $blue;
   }
+  .errorMsg {
+    font-size: 1.5vh;
+    color: $red;
+  }
+  .errorMsgDiv {
+    height: 4vh;
+    border-top-right-radius: 2vh;
+    border-top-left-radius: 2vh;
+    border-bottom-left-radius: 1vh;
+    border-bottom-right-radius: 1vh;
+    background-color: $red;
+    color: $light-blue;
+    box-shadow: inset 0.1vh 0.2vh 1vh rgba(black, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 //! desktop
 @include media(">=tablet") {
   @include default();
+  .errorMsgDiv {
+    width: 60vh;
+  }
   .modal {
     width: 60vh;
     height: 54vh;
@@ -99,6 +120,9 @@
 //! mobile
 @include media("<=tablet") {
   @include default();
+  .errorMsgDiv {
+    width: 36vh;
+  }
   .finalize {
     grid-column: 1 / span 2;
     grid-row: 2;

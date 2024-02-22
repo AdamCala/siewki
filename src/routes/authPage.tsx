@@ -198,11 +198,6 @@ const AuthPage = () => {
 
   return (
     <>
-      {/* Desktop background SVG */}
-      {/* <DesktopBackground
-        className={`${styles.background_svg} absolute bottom-0 z-10 pointer-events-none`}
-      /> */}
-
       {/* ResetPassword component */}
       <ResetPasswordModal
         resetPasswordEmail={resetPasswordEmail}
