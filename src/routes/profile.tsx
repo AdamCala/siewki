@@ -94,7 +94,7 @@ const Profile = () => {
   };
   useEffect(() => {
     fetchData();
-  }, [user]);
+  }, []);
   // Redirects to the authentication page if the user is not authenticated
   useEffect(() => {
     if (!user) {

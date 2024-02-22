@@ -35,10 +35,6 @@ const addTrayModal: FC<addTrayModalProps> = (props) => {
 
   const { user } = useAppSelector((state) => state.auth);
 
-  useEffect(() => {
-    fetchData();
-  }, [fetchData]);
-
   const handleFormSubmit = async (data: TrayForm): Promise<void> => {
     // Clear any existing error messages
     setErrorMessage(null);
@@ -52,6 +48,7 @@ const addTrayModal: FC<addTrayModalProps> = (props) => {
       await setDoc(doc(traysCollectionRef), { name, cols, rows, owner });
       setLoading(false);
       formRef.current!.reset();
+      fetchData();
       onClose();
     } catch (error: any) {
       // Handle errors by updating error message state
