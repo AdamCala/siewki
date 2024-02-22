@@ -69,42 +69,31 @@ const Profile = () => {
       setResetPasswordSuccess(null);
     }
   };
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        if (user) {
-          // Check if user is not null
-          // Query Firestore collection where owner is equal to user.id
-          const q = query(
-            collection(db, "trays"),
-            where("owner", "==", user.id)
-          );
-          const querySnapshot = await getDocs(q);
-          const fetchedTrays: trayResult[] = [];
-          // Iterate over the documents and log them
-          querySnapshot.forEach((doc) => {
-            const data = doc.data();
-            const tray: trayResult = {
-              id: doc.id,
-              name: data.name,
-              owner: data.owner,
-              rows: data.rows,
-              cols: data.cols,
-            };
-            fetchedTrays.push(tray);
-          });
-          setTrays(fetchedTrays);
-        }
-      } catch (error) {
-        console.error("Error fetching data: ", error);
+  const fetchData = async () => {
+    try {
+      if (user) {
+        const q = query(collection(db, "trays"), where("owner", "==", user.id));
+        const querySnapshot = await getDocs(q);
+        const fetchedTrays: trayResult[] = [];
+        querySnapshot.forEach((doc) => {
+          const data = doc.data();
+          const tray: trayResult = {
+            id: doc.id,
+            name: data.name,
+            owner: data.owner,
+            rows: data.rows,
+            cols: data.cols,
+          };
+          fetchedTrays.push(tray);
+        });
+        setTrays(fetchedTrays);
       }
-    };
-
-    // Call the fetchData function
+    } catch (error) {
+      console.error("Error fetching data: ", error);
+    }
+  };
+  useEffect(() => {
     fetchData();
-
-    // Cleanup function to unsubscribe from Firestore listener (if applicable)
-    return () => {};
   }, [user]);
   // Redirects to the authentication page if the user is not authenticated
   useEffect(() => {
@@ -127,6 +116,7 @@ const Profile = () => {
         onClose={() => setOpenSettings(false)}
       />
       <AddTrayModal
+        fetchData={fetchData}
         isOpen={openAddModal}
         onClose={() => setOpenAddModal(false)}
       />
