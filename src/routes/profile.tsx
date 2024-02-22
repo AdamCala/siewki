@@ -7,13 +7,21 @@ import { useAppDispatch, useAppSelector } from "../hooks/storeHook";
 import styles from "../styles/profile/index.module.scss";
 
 import { sendPasswordResetEmail, signOut } from "firebase/auth";
-import { auth } from "../config/firebase";
+import { auth, db } from "../config/firebase";
 import { logout } from "../features/authSlice";
 import SettingsModal from "../components/settingsModal";
 import TraySelect from "../components/traySelect";
 import TraySettings from "../components/traySettings";
 import AddTrayModal from "../components/addTrayModal";
+import { collection, getDocs, query, where } from "@firebase/firestore";
 
+export interface trayResult {
+  id: string;
+  name: string;
+  cols: number;
+  rows: number;
+  owner: string;
+}
 /**
  * Component representing the user profile page.
  * Displays user information, allows logout, and provides options for password reset and settings.
@@ -30,6 +38,7 @@ const Profile = () => {
   const [resetPasswordError, setResetPasswordError] = useState<string | null>(
     null
   );
+  const [trays, setTrays] = useState<trayResult[]>([]);
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -60,7 +69,43 @@ const Profile = () => {
       setResetPasswordSuccess(null);
     }
   };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        if (user) {
+          // Check if user is not null
+          // Query Firestore collection where owner is equal to user.id
+          const q = query(
+            collection(db, "trays"),
+            where("owner", "==", user.id)
+          );
+          const querySnapshot = await getDocs(q);
+          const fetchedTrays: trayResult[] = [];
+          // Iterate over the documents and log them
+          querySnapshot.forEach((doc) => {
+            const data = doc.data();
+            const tray: trayResult = {
+              id: doc.id,
+              name: data.name,
+              owner: data.owner,
+              rows: data.rows,
+              cols: data.cols,
+            };
+            fetchedTrays.push(tray);
+          });
+          setTrays(fetchedTrays);
+        }
+      } catch (error) {
+        console.error("Error fetching data: ", error);
+      }
+    };
 
+    // Call the fetchData function
+    fetchData();
+
+    // Cleanup function to unsubscribe from Firestore listener (if applicable)
+    return () => {};
+  }, [user]);
   // Redirects to the authentication page if the user is not authenticated
   useEffect(() => {
     if (!user) {
@@ -126,7 +171,7 @@ const Profile = () => {
         </div>
         {/* Container for tray listings */}
         <div className={`${styles.tray_container}`}>
-          <TraySelect></TraySelect>
+          <TraySelect trays={trays} />
         </div>
       </div>
     </>
