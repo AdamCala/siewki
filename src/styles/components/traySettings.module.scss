@@ -1,0 +1,112 @@
+@import "../../styles/breakpoints.scss";
+@import "../../styles/vars.scss";
+
+@mixin button {
+  border-radius: 1.5vh;
+  width: 40vh;
+  height: 8vh;
+  background-color: $light-blue;
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 6vh 1fr;
+  transition: transform 0.3s ease-in-out;
+  p {
+    font-size: 3vh;
+    font-weight: bold;
+    font-family: "Roboto";
+    place-self: center;
+    color: $light-navy;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none;
+  }
+}
+
+@mixin button-mobile {
+  @include button;
+  height: 6vh;
+  p {
+    font-size: 2.5vh;
+  }
+  // Override specific mobile styles here
+}
+
+@mixin default {
+  .main {
+    margin-top: 6vh;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5vh;
+  }
+}
+
+@mixin icon {
+  height: 5vh;
+  width: 5vh;
+  place-self: center;
+  margin-left: 4vh;
+  color: $light-navy;
+}
+
+// Mobile-specific styles for icons
+@mixin icon-mobile {
+  @include icon;
+  height: 4vh;
+  width: 4vh;
+  // Override specific mobile styles here
+}
+
+//! desktop
+@include media(">=tablet") {
+  @include default();
+
+  .add_button,
+  .remove_button,
+  .edit_button {
+    @include button();
+  }
+  .add_button:hover {
+    transform: scale(1.05);
+  }
+  .remove_button:hover {
+    transform: scale(1.05);
+  }
+  .edit_button:hover {
+    transform: scale(1.05);
+  }
+
+  .icon {
+    @include icon();
+  }
+}
+
+//! mobile
+@include media("<=tablet") {
+  @include default();
+
+  .add_button,
+  .remove_button,
+  .edit_button {
+    @include button-mobile();
+  }
+  .add_button:hover {
+    transform: scale(1.05);
+  }
+  .remove_button:hover {
+    transform: scale(1.05);
+  }
+  .edit_button:hover {
+    transform: scale(1.05);
+  }
+
+  .icon {
+    @include icon-mobile();
+  }
+
+  .main {
+    gap: 2vh;
+  }
+}

@@ -20,8 +20,9 @@ import { setDoc, doc } from "firebase/firestore";
 import { sendPasswordResetEmail } from "firebase/auth";
 import { auth, db } from "../config/firebase";
 import { yupResolver } from "@hookform/resolvers/yup";
-import ResetPassword from "../components/resetPassword";
-import DesktopBackground from "../components/assets/desktopBackground";
+import ResetPasswordModal from "../components/resetPasswordModal";
+import InputText from "../components/utils/inputText";
+import Button from "../components/utils/button";
 
 /**
  * Component representing the authentication page.
@@ -141,6 +142,7 @@ const AuthPage = () => {
       }
     }
     if (authType === "login") {
+      console.log(user);
       try {
         // Attempt to sign in with Firebase authentication
         const { user } = await signInWithEmailAndPassword(
@@ -196,13 +198,8 @@ const AuthPage = () => {
 
   return (
     <>
-      {/* Desktop background SVG */}
-      {/* <DesktopBackground
-        className={`${styles.background_svg} absolute bottom-0 z-10 pointer-events-none`}
-      /> */}
-
       {/* ResetPassword component */}
-      <ResetPassword
+      <ResetPasswordModal
         resetPasswordEmail={resetPasswordEmail}
         resetPasswordSuccess={resetPasswordSuccess}
         resetPasswordError={resetPasswordError}
@@ -225,13 +222,12 @@ const AuthPage = () => {
             className={`${styles.loginBox} flex flex-col items-center justify-evenly`}
           >
             {/* Google sign-in button */}
-            <div
+            <Button
               onClick={signInWithGoogle}
               className={`${styles.buttonDiv} hover:cursor-pointer`}
-            >
-              <Google className={`${styles.icon} `} />
-              <p className={`${styles.text} `}>Login with Google</p>
-            </div>
+              icon={<Google className={`${styles.icon} `} />}
+              text="Login with Google"
+            />
 
             {/* Or separator */}
             <div className={`${styles.line} `}>
@@ -241,14 +237,12 @@ const AuthPage = () => {
             </div>
 
             {/* Email input */}
-            <div className={`${styles.inputDiv} `}>
-              <input
-                type="text"
-                id="email"
-                placeholder="example@email.com"
-                {...register("email")}
-              />
-            </div>
+            <InputText
+              type="text"
+              id="email"
+              placeholder="example@email.com"
+              {...register("email")}
+            />
             {errors.email ? (
               <span className={`${styles.errorMsg} `}>
                 {errors.email.message}
@@ -258,14 +252,12 @@ const AuthPage = () => {
             )}
 
             {/* Password input */}
-            <div className={`${styles.inputDiv} `}>
-              <input
-                type="password"
-                id="passwd"
-                placeholder="* * * * * * * *"
-                {...register("password")}
-              />
-            </div>
+            <InputText
+              type="password"
+              id="passwd"
+              placeholder="* * * * * * * *"
+              {...register("password")}
+            />
             {errors.password ? (
               <span className={`${styles.errorMsg} `}>
                 {errors.password.message}
@@ -276,14 +268,12 @@ const AuthPage = () => {
 
             {/* Confirm Password input for sign-up */}
             {authType === "sign-up" && (
-              <div className={`${styles.inputDiv} `}>
-                <input
-                  type="password"
-                  id="confpasswd"
-                  placeholder="confirm password"
-                  {...register("confirmPassword")}
-                />
-              </div>
+              <InputText
+                type="password"
+                id="confpasswd"
+                placeholder="confirm password"
+                {...register("confirmPassword")}
+              />
             )}
             {errors.confirmPassword ? (
               <span className={`${styles.errorMsg} `}>
@@ -294,16 +284,15 @@ const AuthPage = () => {
             )}
 
             {/* Submit button */}
-            <button
+            <Button
               disabled={loading}
               type="submit"
-              className={`${styles.buttonDiv} `}
-            >
-              <Mail className={`${styles.icon} text-black/40`} />
-              <p className={`${styles.text} `}>
-                {authType === "login" ? "Login" : "Sign up"} with email
-              </p>
-            </button>
+              className={styles.buttonDiv}
+              icon={<Mail className={`${styles.icon}`} />}
+              text={
+                authType === "login" ? "Login with email" : "Sign up with email"
+              }
+            />
 
             {/* Prompt to switch between login and sign-up forms */}
             {authType === "login" ? (

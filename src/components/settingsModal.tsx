@@ -1,6 +1,8 @@
-import { FC } from "react";
-import styles from "../styles/components/settingsPage.module.scss";
+import { FC, SetStateAction } from "react";
+import styles from "../styles/components/settingsModal.module.scss";
 import { User } from "../models/User";
+import InputText from "./utils/inputText";
+import Button from "./utils/button";
 
 /**
  * Interface representing props for settings modal
@@ -40,7 +42,7 @@ interface settingsProps {
  *   @param {React.Dispatch<React.SetStateAction<string>>} setResetPasswordEmail - State setter for the reset password email.
  * @returns {JSX.Element} - JSX element representing the SettingsPage component.
  */
-const settingsPage: FC<settingsProps> = (props) => {
+const settingsModal: FC<settingsProps> = (props) => {
   const {
     isOpen,
     onClose,
@@ -85,25 +87,23 @@ const settingsPage: FC<settingsProps> = (props) => {
         </div>
 
         {/* Input field for entering email */}
-        <div className={`${styles.inputDiv}`}>
-          <input
-            type="email"
-            value={resetPasswordEmail}
-            onChange={(e) => {
-              setResetPasswordEmail(e.target.value);
-            }}
-            placeholder="your@email.com"
-            id="email"
-          />
-        </div>
+        <InputText
+          className={styles.inputDivWidth}
+          type="email"
+          value={resetPasswordEmail}
+          onChange={(e: { target: { value: SetStateAction<string> } }) => {
+            setResetPasswordEmail(e.target.value);
+          }}
+          placeholder="your@email.com"
+          id="email"
+        />
 
         {/* Button to trigger password reset */}
-        <div
+        <Button
           onClick={handlePasswordReset}
-          className={`${styles.buttonDiv} cursor-pointer`}
-        >
-          <p className={`my-5`}>Change Password</p>
-        </div>
+          className={styles.buttonDiv}
+          text="Change Password"
+        />
 
         {/* Display success message if any */}
         {resetPasswordSuccess && (
@@ -116,12 +116,10 @@ const settingsPage: FC<settingsProps> = (props) => {
         )}
 
         {/* Button to close the modal */}
-        <div onClick={onClose} className={`${styles.buttonDiv} cursor-pointer`}>
-          <p className={`my-5`}>Close</p>
-        </div>
+        <Button onClick={onClose} className={styles.buttonDiv} text="Close" />
       </div>
     </div>
   );
 };
 
-export default settingsPage;
+export default settingsModal;

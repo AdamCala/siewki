@@ -1,6 +1,8 @@
-import { FC } from "react";
-import styles from "../styles/components/resetPassword.module.scss";
+import { FC, SetStateAction } from "react";
+import styles from "../styles/components/resetPasswordModal.module.scss";
 import Logo from "./icons/logo";
+import InputText from "./utils/inputText";
+import Button from "./utils/button";
 
 /**
  * Interface representing props for reset password modal
@@ -62,25 +64,22 @@ const resetPassword: FC<resetPasswordProps> = (props) => {
           </p>
         </div>
 
-        {/* Input field for entering email */}
-        <div className={`${styles.inputDiv}`}>
-          <input
-            type="email"
-            value={resetPasswordEmail}
-            onChange={(e) => {
-              setResetPasswordEmail(e.target.value);
-            }}
-            placeholder="your@email.com"
-            id="email"
-          />
-        </div>
+        <InputText
+          type="email"
+          value={resetPasswordEmail}
+          onChange={(e: { target: { value: SetStateAction<string> } }) => {
+            setResetPasswordEmail(e.target.value);
+          }}
+          placeholder="your@email.com"
+          id="email"
+        />
 
         {/* Button to trigger password reset */}
-        <div className={`${styles.buttonDiv}`}>
-          <button onClick={handlePasswordReset} className={`${styles.text}`}>
-            Reset Password
-          </button>
-        </div>
+        <Button
+          onClick={handlePasswordReset}
+          className={`${styles.text}`}
+          text="Reset Password"
+        />
 
         {/* Display success message if any */}
         {resetPasswordSuccess && (
