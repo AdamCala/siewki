@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import styles from "../styles/components/addTrayModal.module.scss";
 import Button from "./utils/button";
 import InputText from "./utils/inputText";
@@ -15,6 +15,7 @@ import { useAppSelector } from "../hooks/storeHook";
 interface addTrayModalProps {
   isOpen: boolean;
   onClose: () => void;
+  fetchData: () => Promise<void>;
 }
 
 /**
@@ -26,11 +27,17 @@ interface addTrayModalProps {
  */
 
 const addTrayModal: FC<addTrayModalProps> = (props) => {
+  const formRef = useRef<HTMLFormElement>(null);
+  const fetchData = props.fetchData;
   const { isOpen, onClose } = props;
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<null | string>(null);
 
   const { user } = useAppSelector((state) => state.auth);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
   const handleFormSubmit = async (data: TrayForm): Promise<void> => {
     // Clear any existing error messages
@@ -44,7 +51,8 @@ const addTrayModal: FC<addTrayModalProps> = (props) => {
       const traysCollectionRef = collection(db, "trays");
       await setDoc(doc(traysCollectionRef), { name, cols, rows, owner });
       setLoading(false);
-      //   onClose();
+      formRef.current!.reset();
+      onClose();
     } catch (error: any) {
       // Handle errors by updating error message state
       setLoading(false);
@@ -52,7 +60,10 @@ const addTrayModal: FC<addTrayModalProps> = (props) => {
       setErrorMessage(errorCode);
     }
   };
-
+  const handleModalClose = () => {
+    formRef.current!.reset();
+    onClose();
+  };
   /**
    * Handles the submission of the authentication form using React Hook Form.
    * - Registers form fields and validation rules using useForm and yupResolver.
@@ -75,7 +86,7 @@ const addTrayModal: FC<addTrayModalProps> = (props) => {
         style={{ transform: `translateY(${isOpen ? "0%" : "-100%"})` }}
       >
         <div className={styles.main}>
-          <form onSubmit={handleSubmit(handleFormSubmit)}>
+          <form ref={formRef} onSubmit={handleSubmit(handleFormSubmit)}>
             {errorMessage && (
               <p className={`${styles.errorMsgDiv} `}>{errorMessage}</p>
             )}
@@ -147,8 +158,9 @@ const addTrayModal: FC<addTrayModalProps> = (props) => {
                 />
                 <Button
                   className={styles.button}
-                  onClick={onClose}
+                  onClick={handleModalClose}
                   text="CANCEL"
+                  type="button"
                 />
               </div>
             </div>
