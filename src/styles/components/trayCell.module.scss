@@ -6,6 +6,12 @@
     background-color: $light-blue;
     border-radius: 1.5vh;
     place-self: center;
+    overflow-y: auto;
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
+  }
+  .main:hover {
+    transform: scale(1.05);
   }
 }
 
