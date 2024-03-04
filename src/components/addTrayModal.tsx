@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef, useState } from "react";
+import { FC, useRef, useState } from "react";
 import styles from "../styles/components/addTrayModal.module.scss";
 import Button from "./utils/button";
 import InputText from "./utils/inputText";

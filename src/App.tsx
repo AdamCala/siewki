@@ -10,6 +10,7 @@ import Profile from "./routes/profile";
 import NotFound from "./routes/notFound";
 import { useAppDispatch } from "./hooks/storeHook";
 import { login } from "./features/authSlice";
+import TrayPage from "./routes/trayPage";
 
 /**
  * Main component representing the application.
@@ -54,6 +55,7 @@ const App = () => {
         <Route path="/siewki" element={<Siewki />} />
         <Route path="/auth" element={<AuthPage />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/tray/:id" element={<TrayPage />} />
       </Routes>
     </>
   );

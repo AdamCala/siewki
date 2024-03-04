@@ -17,6 +17,7 @@ const traySelect: React.FC<TraySelectProps> = ({ trays }) => {
           name={tray.name}
           rows={tray.rows}
           cols={tray.cols}
+          owner={tray.owner}
         />
       ))}
     </div>
