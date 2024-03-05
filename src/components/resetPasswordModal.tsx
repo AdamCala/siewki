@@ -53,51 +53,53 @@ const resetPassword: FC<resetPasswordProps> = (props) => {
       style={{ transform: `translateY(${isOpen ? "0%" : "-100%"})` }}
     >
       {/* Main content container */}
-      <div className={`${styles.main}`}>
-        {/* Password reset section */}
-        <div className={`${styles.forgot} `}>
-          <Logo className={`${styles.logo} `} />
-          <h1 className="text-center">Forgot your password?</h1>
-          <p>
-            Enter your email address and we will send you instructions to reset
-            your password
-          </p>
-        </div>
+      <div className={`${styles.flexWrapper}`}>
+        <div className={`${styles.main}`}>
+          {/* Password reset section */}
+          <div className={`${styles.forgot} `}>
+            <Logo className={`${styles.logo} `} />
+            <h1 className="text-center">Forgot your password?</h1>
+            <p>
+              Enter your email address and we will send you instructions to
+              reset your password
+            </p>
+          </div>
 
-        <InputText
-          type="email"
-          value={resetPasswordEmail}
-          onChange={(e: { target: { value: SetStateAction<string> } }) => {
-            setResetPasswordEmail(e.target.value);
-          }}
-          placeholder="your@email.com"
-          id="email"
-        />
+          <InputText
+            type="email"
+            value={resetPasswordEmail}
+            onChange={(e: { target: { value: SetStateAction<string> } }) => {
+              setResetPasswordEmail(e.target.value);
+            }}
+            placeholder="your@email.com"
+            id="email"
+          />
 
-        {/* Button to trigger password reset */}
-        <Button
-          onClick={handlePasswordReset}
-          className={`${styles.text}`}
-          text="Reset Password"
-        />
+          {/* Button to trigger password reset */}
+          <Button
+            onClick={handlePasswordReset}
+            className={`${styles.text}`}
+            text="Reset Password"
+          />
 
-        {/* Display success message if any */}
-        {resetPasswordSuccess && (
-          <p className={`${styles.success} `}>{resetPasswordSuccess}</p>
-        )}
+          {/* Display success message if any */}
+          {resetPasswordSuccess && (
+            <p className={`${styles.success} `}>{resetPasswordSuccess}</p>
+          )}
 
-        {/* Display error message if any */}
-        {resetPasswordError && (
-          <p className={`${styles.error} `}>{resetPasswordError}</p>
-        )}
+          {/* Display error message if any */}
+          {resetPasswordError && (
+            <p className={`${styles.error} `}>{resetPasswordError}</p>
+          )}
 
-        {/* Line and close button section */}
-        <div className={`${styles.line} `}>
-          <div />
-          <button className="my-5" onClick={onClose}>
-            Close
-          </button>
-          <div />
+          {/* Line and close button section */}
+          <div className={`${styles.line} `}>
+            <div />
+            <button className="my-5" onClick={onClose}>
+              Close
+            </button>
+            <div />
+          </div>
         </div>
       </div>
     </div>

@@ -51,6 +51,7 @@ const trayPage = () => {
         className={styles.tray}
         style={{ gridTemplateColumns, gridTemplateRows }}
       >
+        <div className={styles.magicIndexHideout}></div>
         {Array.from({ length: cols + 1 }).map((_, colIndex) => (
           <div key={`row-header-${colIndex}`} className={styles.colIndex}>
             {colIndex === 0 ? (

@@ -24,11 +24,19 @@
     border-radius: 0.5vh;
     background-color: rgba($light-navy, 0.75);
   }
+  ::-webkit-scrollbar-corner {
+    background-color: transparent;
+  }
   .tray {
     margin-top: 10vh;
     width: fit-content;
+    height: fit-content;
+    max-width: 90%;
+    max-height: 80%;
     display: grid;
     gap: 1rem;
+    grid-auto-rows: 5rem;
+    align-content: start;
     overflow: scroll;
   }
   .cell {
@@ -64,6 +72,13 @@
   }
   .hidden {
     display: none;
+  }
+  .magicIndexHideout {
+    position: absolute;
+    z-index: 10;
+    width: 5rem;
+    height: 5rem;
+    background-color: $blue;
   }
 }
 
