@@ -3,6 +3,7 @@ import styles from "../styles/components/resetPasswordModal.module.scss";
 import Logo from "./icons/logo";
 import InputText from "./utils/inputText";
 import Button from "./utils/button";
+import ErrorPopup from "./utils/errorPopup";
 
 /**
  * Interface representing props for reset password modal
@@ -45,13 +46,27 @@ const resetPassword: FC<resetPasswordProps> = (props) => {
     resetPasswordError,
     setResetPasswordEmail,
   } = props;
-
+  console.log(resetPasswordSuccess);
+  console.log(resetPasswordError);
   return (
     // Outer container with fixed positioning and backdrop blur
     <div
       className={`fixed top-0 left-0 right-0 bottom-0 z-10 flex justify-center items-center backdrop-blur-sm`}
       style={{ transform: `translateY(${isOpen ? "0%" : "-200%"})` }}
     >
+      {resetPasswordSuccess && (
+        <ErrorPopup
+          error={false} // There is no error in this case
+          messages={{ success: { message: resetPasswordSuccess } }}
+        />
+      )}
+      {/* Display error message if any */}
+      {resetPasswordError && (
+        <ErrorPopup
+          error={true} // There is an error in this case
+          messages={{ error: { message: resetPasswordError } }}
+        />
+      )}
       {/* Main content container */}
       <div className={`${styles.flexWrapper}`}>
         <div className={`${styles.main}`}>
@@ -81,16 +96,6 @@ const resetPassword: FC<resetPasswordProps> = (props) => {
             className={`${styles.text}`}
             text="Reset Password"
           />
-
-          {/* Display success message if any */}
-          {resetPasswordSuccess && (
-            <p className={`${styles.success} `}>{resetPasswordSuccess}</p>
-          )}
-
-          {/* Display error message if any */}
-          {resetPasswordError && (
-            <p className={`${styles.error} `}>{resetPasswordError}</p>
-          )}
 
           {/* Line and close button section */}
           <div className={`${styles.line} `}>

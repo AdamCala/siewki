@@ -23,9 +23,10 @@ export const trayFormSchema = () => {
      */
     cols: yup
       .number()
+      .typeError("Please provide a col number")
       .integer("Column count cannot be a fraction")
       .moreThan(0, "You need to define at least 1 column")
-      .required("Please provide the number of columns"),
+      .required("Please provide a col number"),
 
     /**
      * Validates the rows field.
@@ -35,9 +36,10 @@ export const trayFormSchema = () => {
      */
     rows: yup
       .number()
+      .typeError("Please provide a row number")
       .integer("Row count cannot be a fraction")
       .moreThan(0, "You need to define at least 1 row")
-      .required("Please provide the number of row"),
+      .required("Please provide a row number"),
 
     /**
      * Validates the owner field.

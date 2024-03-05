@@ -23,7 +23,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import ResetPasswordModal from "../components/resetPasswordModal";
 import InputText from "../components/utils/inputText";
 import Button from "../components/utils/button";
+import ErrorPopup from "../components/utils/errorPopup";
 
+interface ErrorMessage {
+  message: string | undefined;
+}
 /**
  * Component representing the authentication page.
  * Handles user login, sign-up, and password reset functionalities.
@@ -70,7 +74,9 @@ const AuthPage = () => {
       );
       setResetPasswordError(null);
     } catch (error: any) {
-      setResetPasswordError(error.code);
+      if (error.code == "auth/invalid-email") {
+        setResetPasswordError("Please provide a valid email");
+      }
       setResetPasswordSuccess(null);
     }
   };
@@ -195,7 +201,7 @@ const AuthPage = () => {
     );
     console.log(authType);
   };
-
+  console.log(errors);
   return (
     <>
       {/* ResetPassword component */}
@@ -208,7 +214,22 @@ const AuthPage = () => {
         onClose={() => setResetPassword(false)}
         handlePasswordReset={handlePasswordReset}
       />
-
+      {errors ? (
+        <ErrorPopup
+          error={true}
+          messages={Object.keys(errors).reduce(
+            (acc, key) => {
+              acc[key as keyof AuthForm] = {
+                message: errors[key as keyof AuthForm]?.message,
+              };
+              return acc;
+            },
+            {} as Record<keyof AuthForm, ErrorMessage> // Define the initial type of accumulator
+          )}
+        />
+      ) : (
+        <></>
+      )}
       {/* Main content of the authentication page */}
       <div className={styles.main}>
         {/* Authentication form */}
@@ -243,13 +264,6 @@ const AuthPage = () => {
               placeholder="example@email.com"
               {...register("email")}
             />
-            {errors.email ? (
-              <span className={`${styles.errorMsg} `}>
-                {errors.email.message}
-              </span>
-            ) : (
-              <></>
-            )}
 
             {/* Password input */}
             <InputText
@@ -258,13 +272,6 @@ const AuthPage = () => {
               placeholder="* * * * * * * *"
               {...register("password")}
             />
-            {errors.password ? (
-              <span className={`${styles.errorMsg} `}>
-                {errors.password.message}
-              </span>
-            ) : (
-              <></>
-            )}
 
             {/* Confirm Password input for sign-up */}
             {authType === "sign-up" && (
@@ -274,13 +281,6 @@ const AuthPage = () => {
                 placeholder="confirm password"
                 {...register("confirmPassword")}
               />
-            )}
-            {errors.confirmPassword ? (
-              <span className={`${styles.errorMsg} `}>
-                {errors.confirmPassword.message}
-              </span>
-            ) : (
-              <></>
             )}
 
             {/* Submit button */}

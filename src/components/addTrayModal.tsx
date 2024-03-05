@@ -11,13 +11,16 @@ import { db } from "../config/firebase";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useAppSelector } from "../hooks/storeHook";
+import ErrorPopup from "./utils/errorPopup";
 
 interface addTrayModalProps {
   isOpen: boolean;
   onClose: () => void;
   fetchData: () => Promise<void>;
 }
-
+interface ErrorMessage {
+  message: string | undefined;
+}
 /**
  * @component
  * @param {Object} props - Component props containing:
@@ -75,6 +78,7 @@ const addTrayModal: FC<addTrayModalProps> = (props) => {
   } = useForm<TrayForm>({
     resolver: yupResolver(trayFormSchema()),
   });
+  console.log(errors);
 
   return (
     <>
@@ -82,6 +86,22 @@ const addTrayModal: FC<addTrayModalProps> = (props) => {
         className={`fixed top-0 left-0 right-0 bottom-0 z-10 flex justify-center items-center backdrop-blur-sm`}
         style={{ transform: `translateY(${isOpen ? "0%" : "-200%"})` }}
       >
+        {errors ? (
+          <ErrorPopup
+            error={true}
+            messages={Object.keys(errors).reduce(
+              (acc: Record<string, ErrorMessage>, key) => {
+                acc[key as keyof TrayForm] = {
+                  message: errors[key as keyof TrayForm]?.message,
+                };
+                return acc;
+              },
+              {}
+            )}
+          />
+        ) : (
+          <></>
+        )}
         <div className={styles.main}>
           <form ref={formRef} onSubmit={handleSubmit(handleFormSubmit)}>
             {errorMessage && (
@@ -102,14 +122,6 @@ const addTrayModal: FC<addTrayModalProps> = (props) => {
                   {...register("name")}
                 />
 
-                {errors.name ? (
-                  <span className={`${styles.errorMsg} `}>
-                    {errors.name.message}
-                  </span>
-                ) : (
-                  <></>
-                )}
-
                 <AddCols className={`${styles.icon} ${styles.row2}`} />
                 <InputText
                   className={`${styles.inputText} ${styles.row2}`}
@@ -119,14 +131,6 @@ const addTrayModal: FC<addTrayModalProps> = (props) => {
                   {...register("cols")}
                 />
 
-                {errors.cols ? (
-                  <span className={`${styles.errorMsg} `}>
-                    {errors.cols.message}
-                  </span>
-                ) : (
-                  <></>
-                )}
-
                 <AddRows className={`${styles.icon} ${styles.row3}`} />
                 <InputText
                   className={`${styles.inputText} ${styles.row3}`}
@@ -135,14 +139,6 @@ const addTrayModal: FC<addTrayModalProps> = (props) => {
                   id="rows"
                   {...register("rows")}
                 />
-
-                {errors.rows ? (
-                  <span className={`${styles.errorMsg} `}>
-                    {errors.rows.message}
-                  </span>
-                ) : (
-                  <div style={{ display: "none" }}></div>
-                )}
               </div>
               <SeedlingTray className={styles.trayIcon} />
               <div className={styles.finalize}>

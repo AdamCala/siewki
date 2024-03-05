@@ -2,10 +2,18 @@
 @import "../../styles/vars.scss";
 
 .main {
+  display: grid;
+  height: 100vh;
+  grid-template-columns: 1fr 1fr;
   font-family: "Roboto";
-  background-color: $blue;
   h1 {
     color: $navy;
     font-size: x-large;
   }
+}
+.left {
+  background-color: $blue;
+}
+.right {
+  background-color: $light-blue;
 }
