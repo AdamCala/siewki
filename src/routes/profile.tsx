@@ -65,7 +65,9 @@ const Profile = () => {
       );
       setResetPasswordError(null);
     } catch (error: any) {
-      setResetPasswordError(error.code);
+      if (error.code == "auth/invalid-email") {
+        setResetPasswordError("Please provide a valid email");
+      }
       setResetPasswordSuccess(null);
     }
   };
