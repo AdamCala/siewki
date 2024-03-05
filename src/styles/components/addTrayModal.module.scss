@@ -7,7 +7,6 @@
     height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: center;
     font-family: "Roboto";
   }
   .hidden {
@@ -61,9 +60,11 @@
     grid-column: 1;
   }
   .modify > *:nth-child(odd) {
-    justify-self: start;
+    justify-self: end;
+    align-self: center;
   }
   .modify > *:nth-child(even) {
+    align-self: center;
     justify-self: end;
   }
   .trayIcon {
@@ -97,6 +98,9 @@
 //! desktop
 @include media(">=tablet") {
   @include default();
+  .main {
+    align-items: center;
+  }
   .errorMsgDiv {
     width: 60vh;
   }
@@ -108,6 +112,9 @@
   }
   .inputText {
     width: 30vh;
+    input {
+      width: 28vh;
+    }
   }
   .button {
     width: 25vh;
@@ -120,8 +127,15 @@
 //! mobile
 @include media("<=tablet") {
   @include default();
+  .trayIcon {
+    width: 8rem;
+  }
+  .main {
+    align-items: center;
+    font-size: 0.5rem;
+  }
   .errorMsgDiv {
-    width: 36vh;
+    width: 12rem; // Reduced from 36rem to approximately 12rem
   }
   .finalize {
     grid-column: 1 / span 2;
@@ -130,27 +144,31 @@
     align-items: row;
     flex-direction: row;
     justify-content: center;
-    gap: 2vh;
-    padding-bottom: 5vh;
+    gap: 0.67rem; // Reduced from 2rem to approximately 0.67rem
+    padding-bottom: 0.2rem; // Reduced from 5rem to approximately 1.67rem
+    padding-top: 2.7rem; // Reduced from 5rem to approximately 1.67rem
+    height: 1.5rem;
   }
   .modal {
-    width: 36vh;
-    height: 54vh;
-    grid-template-columns: 18vh 18vh;
-    grid-template-rows: 27vh 27vh;
+    width: 12rem; // Reduced from 36rem to approximately 12rem
+    height: 16rem; // Reduced from 54rem to approximately 18rem
+    grid-template-columns: 6rem 6rem; // Reduced from 18rem to approximately 6rem
+    grid-template-rows: 8rem 8rem; // Reduced from 27rem to approximately 9rem
   }
-
   .inputText {
-    width: 18vh;
+    height: 1.8rem;
+    width: 6.2rem; // Reduced from 18rem to approximately 6rem
     input {
-      width: 17vh;
+      height: 1.4rem;
+      width: 5.8rem; // Reduced from 17rem to approximately 5.67rem
     }
   }
   .button {
-    width: 14vh;
-    font-size: smaller;
+    height: 1.8rem;
+    width: 4.67rem; // Reduced from 14rem to approximately 4.67rem
+    font-size: 0.7rem;
   }
   .row1 {
-    width: 26vh;
+    width: 8.67rem; // Reduced from 26rem to approximately 8.67rem
   }
 }

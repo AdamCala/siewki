@@ -101,15 +101,15 @@ const addTrayModal: FC<addTrayModalProps> = (props) => {
                   id="name"
                   {...register("name")}
                 />
-                <div className={styles.warningDiv}>
-                  {errors.name ? (
-                    <span className={`${styles.errorMsg} `}>
-                      {errors.name.message}
-                    </span>
-                  ) : (
-                    <></>
-                  )}
-                </div>
+
+                {errors.name ? (
+                  <span className={`${styles.errorMsg} `}>
+                    {errors.name.message}
+                  </span>
+                ) : (
+                  <></>
+                )}
+
                 <AddCols className={`${styles.icon} ${styles.row2}`} />
                 <InputText
                   className={`${styles.inputText} ${styles.row2}`}
@@ -118,15 +118,15 @@ const addTrayModal: FC<addTrayModalProps> = (props) => {
                   id="cols"
                   {...register("cols")}
                 />
-                <div className={styles.warningDiv}>
-                  {errors.cols ? (
-                    <span className={`${styles.errorMsg} `}>
-                      {errors.cols.message}
-                    </span>
-                  ) : (
-                    <></>
-                  )}
-                </div>
+
+                {errors.cols ? (
+                  <span className={`${styles.errorMsg} `}>
+                    {errors.cols.message}
+                  </span>
+                ) : (
+                  <></>
+                )}
+
                 <AddRows className={`${styles.icon} ${styles.row3}`} />
                 <InputText
                   className={`${styles.inputText} ${styles.row3}`}
@@ -135,15 +135,14 @@ const addTrayModal: FC<addTrayModalProps> = (props) => {
                   id="rows"
                   {...register("rows")}
                 />
-                <div className={styles.warningDiv}>
-                  {errors.rows ? (
-                    <span className={`${styles.errorMsg} `}>
-                      {errors.rows.message}
-                    </span>
-                  ) : (
-                    <></>
-                  )}
-                </div>
+
+                {errors.rows ? (
+                  <span className={`${styles.errorMsg} `}>
+                    {errors.rows.message}
+                  </span>
+                ) : (
+                  <div style={{ display: "none" }}></div>
+                )}
               </div>
               <SeedlingTray className={styles.trayIcon} />
               <div className={styles.finalize}>
