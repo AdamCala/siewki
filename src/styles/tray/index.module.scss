@@ -8,10 +8,15 @@
     background-color: $blue;
     font-family: "Roboto";
     display: flex;
-    justify-content: center;
-    padding-right: 10vh;
-    padding-left: 10vh;
+    justify-content: flex-end;
     padding-bottom: 5vh;
+  }
+  .name {
+    position: absolute;
+    top: 5vh;
+    left: 5vh;
+    font-size: 6vh;
+    color: $navy;
   }
   ::-webkit-scrollbar {
     width: 1vh;
@@ -28,7 +33,7 @@
     background-color: transparent;
   }
   .tray {
-    margin-top: 10vh;
+    margin-top: 15vh;
     width: fit-content;
     height: fit-content;
     max-width: 90%;
@@ -38,11 +43,16 @@
     grid-auto-rows: 5rem;
     align-content: start;
     overflow: scroll;
+    border-radius: 4vh;
   }
   .cell {
     width: 5rem;
     height: 5rem;
     background-color: $light-blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1vh;
   }
   .colIndex {
     width: 5rem;
@@ -80,14 +90,26 @@
     height: 5rem;
     background-color: $blue;
   }
+  .icon {
+    width: 4rem;
+    color: $navy;
+  }
 }
 
 //! desktop
 @include media(">=tablet") {
   @include default();
+  .main {
+    padding-right: 10vh;
+    padding-left: 10vh;
+  }
 }
 
 //! mobile
 @include media("<=tablet") {
   @include default();
+  .main {
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
 }

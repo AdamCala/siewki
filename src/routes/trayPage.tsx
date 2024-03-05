@@ -10,10 +10,13 @@ import {
 import { db } from "../config/firebase";
 import { useAppSelector } from "../hooks/storeHook";
 import { useMemo, useState } from "react";
+import Add from "../components/icons/add";
 const trayPage = () => {
   const { user } = useAppSelector((state) => state.auth);
   const [rows, setRows] = useState(0);
   const [cols, setCols] = useState(0);
+  const [name, setName] = useState("");
+
   const { id } = useParams();
   const fetchData = useMemo(
     () => async () => {
@@ -32,6 +35,7 @@ const trayPage = () => {
               const data = doc.data() as DocumentData;
               setRows(data.rows);
               setCols(data.cols);
+              setName(data.name);
             }
           });
         }
@@ -47,6 +51,7 @@ const trayPage = () => {
 
   return (
     <div className={styles.main}>
+      <div className={styles.name}>{name}</div>
       <div
         className={styles.tray}
         style={{ gridTemplateColumns, gridTemplateRows }}
@@ -69,7 +74,13 @@ const trayPage = () => {
                 colIndex === 0 ? styles.rowIndex : ""
               }`}
             >
-              {colIndex === 0 ? <div>{rowIndex + 1}</div> : <div>sus</div>}
+              {colIndex === 0 ? (
+                <div>{rowIndex + 1}</div>
+              ) : (
+                <div>
+                  <Add className={styles.icon} />
+                </div>
+              )}
             </div>
           ))
         )}

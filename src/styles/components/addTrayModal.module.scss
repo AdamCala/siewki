@@ -123,14 +123,14 @@
     justify-content: center;
     gap: 0.67rem; // Reduced from 2rem to approximately 0.67rem
     padding-bottom: 0.2rem; // Reduced from 5rem to approximately 1.67rem
-    padding-top: 2.7rem; // Reduced from 5rem to approximately 1.67rem
+    padding-top: 4rem; // Reduced from 5rem to approximately 1.67rem
     height: 1.5rem;
   }
   .modal {
-    width: 12rem; // Reduced from 36rem to approximately 12rem
-    height: 16rem; // Reduced from 54rem to approximately 18rem
-    grid-template-columns: 6rem 6rem; // Reduced from 18rem to approximately 6rem
-    grid-template-rows: 8rem 8rem; // Reduced from 27rem to approximately 9rem
+    width: 16rem; // Reduced from 36rem to approximately 12rem
+    height: 20rem; // Reduced from 54rem to approximately 18rem
+    grid-template-columns: 8rem 8rem; // Reduced from 18rem to approximately 6rem
+    grid-template-rows: 10rem 10rem; // Reduced from 27rem to approximately 9rem
   }
   .inputText {
     height: 1.8rem;

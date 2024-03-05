@@ -11,14 +11,16 @@ const traySelect: React.FC<TraySelectProps> = ({ trays }) => {
   return (
     <div className={styles.main}>
       {trays.map((tray) => (
-        <TrayCell
-          key={tray.id}
-          id={tray.id}
-          name={tray.name}
-          rows={tray.rows}
-          cols={tray.cols}
-          owner={tray.owner}
-        />
+        <>
+          <TrayCell
+            key={tray.id}
+            id={tray.id}
+            name={tray.name}
+            rows={tray.rows}
+            cols={tray.cols}
+            owner={tray.owner}
+          />
+        </>
       ))}
     </div>
   );

@@ -3,11 +3,11 @@
 
 @mixin default {
   .main {
-    // display: grid;
     display: flex;
     flex-direction: column;
     gap: 2rem;
     margin: 2vh;
+    overflow: scroll;
   }
 }
 .main::-webkit-scrollbar {
@@ -25,12 +25,9 @@
 @include media(">=tablet") {
   @include default();
   .main {
+    overflow: scroll;
+    max-height: 96vh;
     margin-top: 6vh;
-    // grid-template-columns: repeat(auto-fill, minmax(15vh, 1fr));
-    // grid-auto-rows: 15vh;
-    // margin-top: 10vh;
-    // max-height: calc(100vh - 15vh);
-    // gap: 3vh;
   }
 }
 
@@ -39,11 +36,5 @@
   @include default();
   .main {
     margin-top: 6vh;
-    // grid-template-columns: repeat(auto-fill, minmax(12vh, 1fr));
-    // grid-auto-rows: 12vh;
-    // margin-top: 5vh;
-    // max-height: calc(100vh - 24vh);
-    // gap: 2vh;
-    // overflow-y: hidden;
   }
 }

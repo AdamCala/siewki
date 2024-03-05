@@ -171,8 +171,9 @@ const AuthPage = () => {
       } catch (error: any) {
         // Handle errors by updating error message state
         setLoading(false);
-        const errorCode = error.code;
-        setErrorMessage(errorCode);
+        if (error.code == "auth/invalid-credential") {
+          setErrorMessage("Wrong Password");
+        }
       }
     }
   };
@@ -230,14 +231,16 @@ const AuthPage = () => {
       ) : (
         <></>
       )}
+      {errorMessage && (
+        <ErrorPopup
+          error={true} // There is an error in this case
+          messages={{ error: { message: errorMessage } }}
+        />
+      )}
       {/* Main content of the authentication page */}
       <div className={styles.main}>
         {/* Authentication form */}
         <form onSubmit={handleSubmit(handleFormSubmit)}>
-          {errorMessage && (
-            <p className={`${styles.errorMsgDiv} `}>{errorMessage}</p>
-          )}
-
           {/* Login box containing form elements */}
           <div
             className={`${styles.loginBox} flex flex-col items-center justify-evenly`}
