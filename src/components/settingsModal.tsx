@@ -58,7 +58,7 @@ const settingsModal: FC<settingsProps> = (props) => {
     // Outer container with fixed positioning and backdrop blur
     <div
       className={`fixed top-0 left-0 right-0 bottom-0 z-10 flex justify-center items-center backdrop-blur-sm`}
-      style={{ transform: `translateY(${isOpen ? "0%" : "-100%"})` }}
+      style={{ transform: `translateY(${isOpen ? "0%" : "-200%"})` }}
     >
       {/* Main content container */}
       <div className={`${styles.main}`}>

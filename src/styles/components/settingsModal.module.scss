@@ -12,7 +12,6 @@
     border-radius: 2vh;
     padding-top: 5vh;
     padding-bottom: 5vh;
-    margin-bottom: 10vh;
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -24,9 +23,6 @@
   }
 
   .outer_circle {
-    position: absolute;
-    top: 5vh;
-    left: 5vh;
     width: 80%;
     display: flex;
     justify-content: space-between;
@@ -58,12 +54,12 @@
   }
 
   .success {
-    padding-bottom: 2vh;
+    padding-top: 2vh;
     font-size: 1.6vh;
     color: $green;
   }
   .error {
-    padding-bottom: 2vh;
+    // padding-bottom: 2vh;
     font-size: 1.6vh;
     color: $red;
   }
@@ -71,6 +67,7 @@
   //> overwrite the inpoutText styles
   .inputDivWidth {
     width: 30vh !important;
+    font-size: 2.4vh;
   }
   .buttonDiv {
     width: 30vh !important;
@@ -81,16 +78,58 @@
 //! desktop
 @include media(">=tablet") {
   @include default();
+  .outer_circle {
+    margin-bottom: 15vh;
+  }
 }
 
 //! mobile
 @include media("<=tablet") {
   @include default();
+  .outer_circle {
+    margin-bottom: 3.4rem;
+    .circle {
+      height: 5rem;
+      background-color: $light-blue;
+      img,
+      div {
+        width: 4.5rem;
+        height: 4.5rem;
+        color: $navy;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: normal;
+        font-size: 2rem;
+        border: 0.2rem solid $blue;
+      }
+    }
+    div {
+      p {
+        font-weight: bold;
+        font-size: 0.7rem;
+      }
+      margin-right: 1.7vh;
+    }
+  }
   .main {
-    width: 35vh;
-    height: 50vh;
+    width: 15rem;
+    height: 20rem;
   }
   .outer_circle {
     flex-direction: column;
+  }
+  .inputDivWidth {
+    height: 1.8rem;
+    width: 10.2rem !important; // Reduced from 18rem to approximately 6rem
+    input {
+      height: 1.4rem;
+      width: 10rem; // Reduced from 17rem to approximately 5.67rem
+    }
+  }
+  .buttonDiv {
+    height: 1.8rem;
+    width: 10.2rem !important; // Reduced from 14rem to approximately 4.67rem
+    font-size: 0.7rem;
   }
 }
