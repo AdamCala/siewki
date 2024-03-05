@@ -245,6 +245,7 @@ const AuthPage = () => {
             {/* Google sign-in button */}
             <Button
               onClick={signInWithGoogle}
+              type="button"
               className={`${styles.buttonDiv} hover:cursor-pointer`}
               icon={<Google className={`${styles.icon} `} />}
               text="Login with Google"
