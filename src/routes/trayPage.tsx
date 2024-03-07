@@ -11,6 +11,7 @@ import { db } from "../config/firebase";
 import { useAppSelector } from "../hooks/storeHook";
 import { useMemo, useState } from "react";
 import Add from "../components/icons/add";
+import TrayCell from "../components/trayCell";
 const trayPage = () => {
   const { user } = useAppSelector((state) => state.auth);
   const [rows, setRows] = useState(0);
@@ -74,13 +75,7 @@ const trayPage = () => {
                 colIndex === 0 ? styles.rowIndex : ""
               }`}
             >
-              {colIndex === 0 ? (
-                <div>{rowIndex + 1}</div>
-              ) : (
-                <div>
-                  <Add className={styles.icon} />
-                </div>
-              )}
+              {colIndex === 0 ? <div>{rowIndex + 1}</div> : <TrayCell />}
             </div>
           ))
         )}

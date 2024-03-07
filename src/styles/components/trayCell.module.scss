@@ -2,6 +2,10 @@
 @import "../../styles/vars.scss";
 
 @mixin default {
+  .icon {
+    width: 4rem;
+    color: $navy;
+  }
 }
 
 //! desktop
