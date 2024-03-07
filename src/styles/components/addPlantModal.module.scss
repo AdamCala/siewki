@@ -2,11 +2,164 @@
 @import "../../styles/vars.scss";
 
 @mixin default {
+  .main {
+    z-index: 2;
+    border-radius: 2vh;
+    background-color: $light-blue;
+    box-shadow: 0.4vh 0.6vh 0.75vh rgba(black, 0.3);
+  }
+  .name {
+    font-family: "Roboto", sans-serif;
+    color: $navy;
+    align-self: center;
+    padding-left: 3vh;
+    padding-top: 3vh;
+    font-size: 1.2rem;
+  }
+  .buttonPlant {
+    justify-self: center;
+    align-self: center;
+  }
+  .buttonDate {
+    font-family: "Roboto", sans-serif;
+    font-size: 1rem;
+    color: $navy;
+    justify-self: center;
+    align-self: center;
+  }
+  .buttonGerm {
+    margin: 0;
+    justify-self: center;
+    align-self: center;
+  }
+  .desc {
+    justify-self: center;
+    align-self: center;
+    word-break: break-all;
+    font-family: "Roboto", sans-serif;
+    font-size: 1rem;
+    background-color: $light-blue;
+    border-radius: 1vh;
+    letter-spacing: 0.12vh;
+    box-shadow: inset 0.2vh 0.2vh 0.5vh rgba(black, 0.3);
+    padding: 1vh;
+  }
+  .cat {
+    justify-self: center;
+    align-self: center;
+  }
+  .src {
+    justify-self: center;
+    align-self: center;
+    background-color: $light-blue;
+  }
+  .reset {
+    justify-self: center;
+    align-self: center;
+  }
 }
 //! desktop
 @include media(">=tablet") {
+  @include default();
+  .main {
+    width: 90vh;
+    height: 75vh;
+    display: grid;
+    grid-template-rows: 5vh 15vh 15vh 15vh 15vh 10vh;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .name {
+    grid-row: 1;
+    grid-column: 1;
+  }
+  .buttonPlant {
+    grid-row: 2;
+    grid-column: 1;
+  }
+  .buttonDate {
+    grid-row: 2;
+    grid-column: 2;
+  }
+  .buttonGerm {
+    grid-row: 2;
+    grid-column: 3;
+  }
+  .desc {
+    grid-row: 3 / span 2;
+    grid-column: 1 / span 2;
+    width: 80%;
+    height: 80%;
+  }
+  .cat {
+    grid-row: 3;
+    grid-column: 3;
+  }
+  .src {
+    grid-row: 4;
+    grid-column: 3;
+  }
+  .reset {
+    grid-row: 5;
+    grid-column: 1;
+    margin: 0;
+  }
+  .finalize {
+    grid-row: 6;
+    grid-column: 2 / span 2;
+  }
+  .buttonAdd {
+    width: 20%;
+    margin: 0;
+  }
+  .buttonDel {
+    width: 20%;
+    margin: 0;
+  }
+  .finalize {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 3vh;
+    padding-right: 3vh;
+    padding-bottom: 3vh;
+  }
 }
 
 //! mobile
 @include media("<=tablet") {
+  @include default();
+  .main {
+    width: 20rem;
+    height: 40rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .desc {
+    width: 70%;
+    height: 20%;
+  }
+  .reset {
+    margin: 0;
+  }
+  .finalize {
+    align-self: center;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-between;
+    width: 70%;
+    height: 5.8vh;
+  }
+  .buttonAdd {
+    width: 45%;
+    height: 5.8vh;
+    margin: 0;
+  }
+  .buttonDel {
+    width: 45%;
+    height: 5.8vh;
+    margin: 0;
+  }
 }

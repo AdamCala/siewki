@@ -5,10 +5,9 @@
   .icon {
     width: 4rem;
     color: $navy;
-    transition: transform 0.1s ease-in-out;
+    cursor: pointer;
   }
   .icon:hover {
-    transform: scale(1.04);
   }
 }
 

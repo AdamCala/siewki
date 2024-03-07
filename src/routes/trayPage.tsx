@@ -10,7 +10,6 @@ import {
 import { db } from "../config/firebase";
 import { useAppSelector } from "../hooks/storeHook";
 import { useMemo, useState } from "react";
-import Add from "../components/icons/add";
 import TrayCell from "../components/trayCell";
 import AddPlantModal from "../components/addPlantModal";
 const trayPage = () => {
@@ -56,6 +55,7 @@ const trayPage = () => {
     <>
       <AddPlantModal
         isOpen={openPlantModal}
+        trayName={name}
         onClose={() => setOpenPlantModal(false)}
       />
       <div className={styles.main}>
@@ -85,7 +85,11 @@ const trayPage = () => {
                 {colIndex === 0 ? (
                   <div>{rowIndex + 1}</div>
                 ) : (
-                  <TrayCell onOpen={() => setOpenPlantModal(true)} />
+                  <TrayCell
+                    row={rowIndex + 1}
+                    col={colIndex}
+                    onOpen={() => setOpenPlantModal(true)}
+                  />
                 )}
               </div>
             ))
