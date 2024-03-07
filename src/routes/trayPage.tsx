@@ -12,11 +12,13 @@ import { useAppSelector } from "../hooks/storeHook";
 import { useMemo, useState } from "react";
 import Add from "../components/icons/add";
 import TrayCell from "../components/trayCell";
+import AddPlantModal from "../components/addPlantModal";
 const trayPage = () => {
   const { user } = useAppSelector((state) => state.auth);
   const [rows, setRows] = useState(0);
   const [cols, setCols] = useState(0);
   const [name, setName] = useState("");
+  const [openPlantModal, setOpenPlantModal] = useState(false);
 
   const { id } = useParams();
   const fetchData = useMemo(
@@ -51,36 +53,46 @@ const trayPage = () => {
   const gridTemplateRows = `repeat(${rows + 1}, 1fr)`;
 
   return (
-    <div className={styles.main}>
-      <div className={styles.name}>{name}</div>
-      <div
-        className={styles.tray}
-        style={{ gridTemplateColumns, gridTemplateRows }}
-      >
-        <div className={styles.magicIndexHideout}></div>
-        {Array.from({ length: cols + 1 }).map((_, colIndex) => (
-          <div key={`row-header-${colIndex}`} className={styles.colIndex}>
-            {colIndex === 0 ? (
-              <div className={styles.hidden}></div>
-            ) : (
-              <div>{colIndex}</div>
-            )}
-          </div>
-        ))}
-        {Array.from({ length: rows }).map((_, rowIndex) =>
-          Array.from({ length: cols + 1 }).map((_, colIndex) => (
-            <div
-              key={`${rowIndex}-${colIndex}`}
-              className={`${styles.cell} ${
-                colIndex === 0 ? styles.rowIndex : ""
-              }`}
-            >
-              {colIndex === 0 ? <div>{rowIndex + 1}</div> : <TrayCell />}
+    <>
+      <AddPlantModal
+        isOpen={openPlantModal}
+        onClose={() => setOpenPlantModal(false)}
+      />
+      <div className={styles.main}>
+        <div className={styles.name}>{name}</div>
+        <div
+          className={styles.tray}
+          style={{ gridTemplateColumns, gridTemplateRows }}
+        >
+          <div className={styles.magicIndexHideout}></div>
+          {Array.from({ length: cols + 1 }).map((_, colIndex) => (
+            <div key={`row-header-${colIndex}`} className={styles.colIndex}>
+              {colIndex === 0 ? (
+                <div className={styles.hidden}></div>
+              ) : (
+                <div>{colIndex}</div>
+              )}
             </div>
-          ))
-        )}
+          ))}
+          {Array.from({ length: rows }).map((_, rowIndex) =>
+            Array.from({ length: cols + 1 }).map((_, colIndex) => (
+              <div
+                key={`${rowIndex}-${colIndex}`}
+                className={`${styles.cell} ${
+                  colIndex === 0 ? styles.rowIndex : ""
+                }`}
+              >
+                {colIndex === 0 ? (
+                  <div>{rowIndex + 1}</div>
+                ) : (
+                  <TrayCell onOpen={() => setOpenPlantModal(true)} />
+                )}
+              </div>
+            ))
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

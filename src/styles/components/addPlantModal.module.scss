@@ -1,0 +1,12 @@
+@import "../../styles/breakpoints.scss";
+@import "../../styles/vars.scss";
+
+@mixin default {
+}
+//! desktop
+@include media(">=tablet") {
+}
+
+//! mobile
+@include media("<=tablet") {
+}
