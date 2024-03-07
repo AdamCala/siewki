@@ -1,9 +1,9 @@
 import { trayResult } from "../routes/profile";
-import styles from "../styles/components/trayCell.module.scss";
+import styles from "../styles/components/trayListing.module.scss";
 import { useNavigate } from "react-router-dom";
 import SeedlingTray from "./icons/seedlingTray";
 
-const trayCell = (props: trayResult) => {
+const trayListing = (props: trayResult) => {
   const { id, cols, rows, name } = props;
   const navigate = useNavigate();
 
@@ -26,4 +26,4 @@ const trayCell = (props: trayResult) => {
   );
 };
 
-export default trayCell;
+export default trayListing;

@@ -1,6 +1,6 @@
 import { trayResult } from "../routes/profile";
 import styles from "../styles/components/traySelect.module.scss";
-import TrayCell from "./trayCell";
+import TrayCell from "./trayListing";
 
 interface TraySelectProps {
   trays: trayResult[];

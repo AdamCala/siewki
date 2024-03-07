@@ -1,21 +1,97 @@
 @import "../../styles/breakpoints.scss";
 @import "../../styles/vars.scss";
 
-.main {
-  background-color: $light-blue;
-  width: 70vh;
-  height: 13vh;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 2fr;
+@mixin default {
+  .hidden {
+    visibility: hidden;
+  }
+  .selected {
+    color: $navy;
+  }
+  .main {
+    display: flex;
+    align-items: center;
+    font-family: "Roboto", sans-serif;
+    overflow: visible;
+  }
+  .tray {
+    background-color: $light-blue;
+    border-radius: 1.5vh;
+    place-self: center;
+    overflow-y: auto;
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
+    border: 0.8vh solid $light-blue;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    div {
+      display: flex;
+      align-items: center;
+    }
+  }
+  .tray:hover {
+    transform: scale(1.05);
+  }
+  .icon {
+    color: rgba($navy, 1);
+  }
 }
 
-.icon_add {
-  height: 10vh;
-  width: 10vh;
-  color: $blue;
+//! desktop
+@include media(">=tablet") {
+  @include default();
+
+  .tray {
+    margin-left: 10vh;
+    width: 80%;
+    height: 12vh;
+    min-height: 10vh;
+    overflow: visible;
+    div {
+      gap: 4vh;
+    }
+  }
+  .icon {
+    height: 9vh;
+  }
+  .name {
+    margin-left: 2rem;
+    font-size: 2.5rem;
+    color: $navy;
+  }
+  .size {
+    font-size: 2.5rem;
+    color: $navy;
+  }
 }
-.icon_tray {
-  height: 6vh;
-  color: $blue;
+
+//! nobile
+@include media("<=tablet") {
+  @include default();
+  .main {
+    justify-content: center;
+  }
+  .tray {
+    width: 85%;
+    height: 4rem;
+    div {
+      gap: 1vh;
+    }
+  }
+  .icon {
+    height: 3rem;
+  }
+  .name {
+    margin-left: 1rem;
+    font-size: 1.5rem;
+    color: $navy;
+  }
+  .size {
+    font-size: 1.5rem;
+    color: $navy;
+  }
+  .icon {
+    width: 10vh;
+  }
 }
